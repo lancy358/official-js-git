@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        变量 :用来存储数据,以便复用)
+        var :当通过var创建一个变量时,会进行预解析(变量提升);因为var会预解析,所以变量会当做属性存到全局的活动变量对象下(window)
+        consloe.log(a) ;//undefined
+        var a=10
+        let  :通过let创建变量不会进行预解析(变量提升):在定义变量之前访问这个变量,之前访问的空间叫暂存死区,不会在window下挂一个属性
+        console.log(a);报错
+        let a =10
+        let支持块级作用域(块级作用域:{}相当于一个封闭空间)
+              console.log(a) 报错
+              {let a=0}
+              *******
+              console.log (a) undefined
+              {var a=0};
+              *******
+              console.log(fn)//undefined
+              {function fn(){
+                  console.log(1)
+              }
+              console.log(fn)
+              在块套块中,子块有函数,如果在父块或者父块的上方访问这个函数,那么都是undefined
+              如果在子块下方访问这个函数,就能找到这个函数
+               console.log(fn)//undefined
+              {console.log(fn)//undefined
+                  {
+                      function fn(){
+
+                      }
+                      fn()
+                      console.log(fn) //函数fn
+                  }
+                  console.log(fn) //函数fn
+              }
+              console.log(fn)//函数fn
+        let在for循环中let会每次存值
+        for(let i=0;i<4;i++){
+            btn.onclick=function(){
+                alert(i)//0,1,2,3
+            }
+        }
+        for(var i=0;i<4;i+=){
+            btn.onclick=function(){
+                alert(i)//4
+            }
+        }
+        babel 将es5转化为es6的工具
+
+        const :常量 不可变的量 :声明一个变量 不允许改动就使用const定义
+        函数 const和 let重复定义一个变量会报错 var会变量提升 不会报错
+        函数
+        let fn=4;
+        function fn(a){
+        }
+        fn()
+        const赋值的数据,他会监控这个数据的地址(const可以是定义一个引用数据类型)
+            const obj={
+                 b:0
+             }
+             obj.b=100
+             console.log(obj)
+             obj=10//报错
+
+             123456
+
+     -->
+     面试题1
+     let ary=[1,2,3];
+     ary.length=0;
+    console.log(ary[0]) //undefined
+    ary.length=2;
+    console.log(ary[0])//1
+    面试题2
+    let aa = {
+        aa:10
+    }
+    let bb = {
+        bb:10
+    }
+    let obj = {
+        aa:20
+    }
+    // obj[bb] = 30; 
+    obj.bb=30;
+    /*
+        obj = {
+            aa:20
+            {bb:10}:30
+            [object Object]：30
+            {aa:10}和{bb:10}都是[object Object]
+        }
+    */
+    console.log(obj.aa);//20
+    // console.log(obj[aa])//30
+    面试题3
+    let ary=[];
+    for(let i=0;i<4;i++);{
+    ary.push(i+1)
+    }
+    console.log(ary)//5
+    //相当于
+    let ary=[];
+    for(let i=0;i<4;i++){};{
+    ary.push(i+1)
+    }
+    console.log(ary)//5
+
+
+    
+</body>
+</html>
