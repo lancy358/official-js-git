@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 简单数据类型加自定义属性 打印属性都是undefined 除了null和undefined是报错 -->
+    <script>
+        // 深克隆:为解决赋址问题，当数据是一个对象且多层嵌套的时候，需要将对象的值拷贝过来，且地址不一致
+        function deepClone(obj){
+            let o=obj.push?{}:[]
+            for(let attr in obj){
+                if(obj[attr]!==null&&typeof(obj[attr])==='object'){
+                    o[attr]=deepClone(obj[attr])
+                }
+                o[attr]=obj[attr]
+            }
+            return o
+        }
+        let ary=[1,2,3,[5]]
+        let ary2=deepClone(ary)
+        console.log(ary2)
+        //例题讲解
+        function Foo() { 
+        getName = function () {console.log(1);};//window.getname=1
+            return this;        
+        }
+        // Foo()
+        // console.log(this) window
+
+        Foo.getName = function () {console.log(2);}; 
+        Foo.prototype.getName = function () {console.log(3);};
+        var getName = function () {console.log(4);};  //window.getname=4
+        function getName() {console.log(5);} 
+
+        Foo.getName(); //2
+        getName();//4
+        Foo().getName();//执行Foo函数 getname重新赋值为1 返回window, window.getname()为1
+        getName();//1
+        var a = new Foo.getName();//2 a=Foo.getName {} new一个函数 没有返回值默认返回实例
+        var b = new Foo().getName(); //3  b=undefined  getName（）执行没有返回值就是undefined
+        var c = new new Foo().getName  //3 c=Foo{}.getName{}
+        console.log(a,b,c);
+         
+        // 函数传参：
+        //     1 参数为原始数据类型的时候，在函数内运算不会影响外面的值
+                let num = 10 ;
+                function fn(o){
+                    o+=2;
+                    console.log(o)//12
+                }
+                fn(num)
+                console.log(num)//10
+            // 2 参数为引用类型的时候，在函数体内修改参数属性对应的属性值时，外面的参数会被修改
+                // let obj={
+                //     name:'hh',
+                // };
+                // function fn1(o){
+                //     o.name='jj'
+                //     console.log(o.name)//jj
+                // }
+                // fn1(obj)
+                // console.log(obj.name)//jj
+            //  3 参数为引用类型，在函数体内重新赋址参数，外面的参数不受印象 
+                 let obj={
+                    name:'hh',
+                };
+                function fn1(o){
+                    o = {
+                        name:'jj',
+                    }
+                    console.log(o.name)//jj
+                }
+                fn1(obj)
+                console.log(obj.name)//hh
+        /*
+         重写call
+         需求 ：函数都有call方法
+               参数：多个参数
+                    第一个是修改this
+                    以后的是实参
+                    null，undefined都数据window
+                    this是谁：只要让某个函数的地址等于某个对象下的方法，this自然就变成了那个对象
+        */
+        Function.prototype.mycall=function(that,...arg){
+            let type =typeof that;
+            if(that===null||that===undefined){
+                that=window;
+            }else{
+                switch(type){
+                    case 'string':
+                        that=new String(that);
+                        break;
+                    case 'boolean':
+                        that=new Boolean(that);
+                        break;
+                    case 'number':
+                        that=new Nymber(that);
+                        break;
+                }
+            }
+            that.fn=this;
+            that.fn(...arg)
+        }
+        function fn(a,b){
+        delete this.fn;
+        console.log(this);
+        console.log(a+b);
+        }
+        fn.mycall({},1,2);
+        /* 
+        写一个数据类型检测库
+         */
+         class tools {
+             static type(data){
+                if(typeof data!=='object'){
+                    return typeof data;
+                }
+                let obj={
+                    object:'Object',
+                    array:'Array',
+                    null:'Null'
+                }
+                let toS=Object.prototype.toString;
+                for(let attr in obj){
+                    if(toS.call(data)===`[object ${abj[sttr]}]`){
+                        return attr
+                    }
+                }
+             }
+
+         }
+         console.log( Tools.type([]) )//array
+         
+
+
+
+       
+    </script>
+    
+</body>
+</html>
