@@ -110,14 +110,14 @@
                 }
             })
             //商城搜索
-            const sele=document.querySelectorAll('#sele');
-            const num=document.querySelectorAll('#num');
-            const txt=document.querySelectorAll('#txt');
-            const btn=document.querySelectorAll('#search');
-            const init=document.querySelectorAll('#init');
-            // console.log(btn);
-            
+            const sele=document.querySelector('#sele');
+            const num=document.querySelector('#num');
+            const txt=document.querySelector('#txt');
+            const btn=document.querySelector('#search');
+            const init=document.querySelector('#init');
+            // console.log(btn);            
             btn.onclick=function(){
+                console.log(123)
                 let {value:v1}=start;//搜索对应数字开始框
                 let {value:v2}=end;//搜索对应数字结束框
                 let {value:v3}=sele//搜索对应选择框
@@ -125,17 +125,18 @@
                 // console.log(v1,v2,v3,v4);
                 
                 if(v4||v1&&v2){//v4有值或者v1和v2都有值
-                    let d=null;
+                    var d ;
                     if(v4){
-                        data.filter((item)=>{
+                        d=data.filter((item)=>{
                             return item[v3].includes(v4)
                         })
                     }else{
-                        data.filter((item)=>{
+                        d=data.filter((item)=>{
                             return item[v3]>=v1&&item[v3]<=v2
                         })
                     }
                     render(d);
+                    // console.log(v3)
                     init.onclick=function(){
                         render( data)
                     }
@@ -145,7 +146,7 @@
             };
             //当搜索内容切换的时候
             sele.onchange=function(){
-                start.value=end.value=tex1.value='';
+                start.value=end.value=txt1.value='';
                 let {value}=this;
                 if(value==='title'){
                     num.className='hide';
@@ -153,7 +154,7 @@
                 }
                 else{
                     num.className='show';
-                    tex1.className='hide';
+                    txt1.className='hide';
                 }
             }
 

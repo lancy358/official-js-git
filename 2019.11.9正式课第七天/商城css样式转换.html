@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+    <section class="box">
+        <nav>
+            <span>排序</span>
+            <a href="javascript:void(0);" data-name="time">
+                <i class="up"></i>
+                <i class="down"></i>
+                上架时间
+            </a>
+            <a href="javascript:void(0);" data-name="hot">
+                <i class="up"></i>
+                <i class="down"></i>
+                热度
+            </a>
+            <a href="javascript:void(0);" data-name="price">
+                <i class="up "></i>
+                <i class="down"></i>
+                价钱
+            </a>
+            <div>
+                <select id="sele">
+                    <option value="title">按照文字搜索</option>
+                    <option value="hot">按照热度搜索</option>
+                    <option value="price">按照价格搜索</option>
+                    
+                </select>
+               <div id="num" class="hide">
+                    <input type="text" id="start">
+                    -<input type="text" id="end">
+               </div>
+               <div id="txt" class="show">
+                    <input type="text" id="txt1">
+               </div>
+                <button id="search">搜索</button>
+                <button id="init">还原</button>
+            </div>
+        </nav>
+        <ul class="list" id="ul">
+           
+        </ul>
+       
+   </section>
+   <script>
+    fetch('./json/product.json').then(d=>d.json()).then(data=>{
+         // console.log(data.concat())
+         let newdata=data.concat();//复制一个新数组,为了一会排序的的时候不影响原数组.
+         function render(newdata){//将数据渲染到页面中去
+             let lis=newdata.map((item,i)=>{
+             let {title,img,price,time,hot}=item;
+                //title="${title}">显示详细信息的标签属性
+                 return (
+                    `<li>
+                         <img src="${img}" alt="">
+                         
+                         <p title="${title}">商品名称:<span>${title.substr(0,6)}</span></p>
+                         <p>上架时间:<span>${time}</span></p>
+                         <p>商品价格:<span>${price}</span></p>
+                         <p>商品热度:<span>${hot}</span></p>
+                         
+                     </li>`  
+                 );
+                 });
+                 ul.innerHTML=lis.join('')
+             //    console.log(lis.join(''));
+         }
+         render(newdata);
+         //排序
+         const as=document.querySelectorAll('a');
+         as.forEach((ele,i)=>{
+             ele.onoff=true;
+             ele.onclick=function(){
+                 if(this.onoff){
+                     newdata.sort((a,b)=>{
+                     // console.log(a,b)
+                         if(this.dataset.name==='time'){
+                             // return new Date(a[this.dataset.name])-new Date(b[this.dataset.name])//转成时间戳
+                             return new Date(a.time)-new Date(b.time)
+                         }
+                         return a[this.dataset.name]-b[this.dataset.name]
+                     });
+
+                 }else{//从大到小排序
+                     newdata.sort((a,b)=>{
+                         if(this.dataset.name==='time'){
+                             // return new Date(b[this.dataset.name])-new Date(a[this.dataset.name])
+                             return new Date(b.time)-new Date(a.time)
+
+                         }
+                         return b[this.dataset.name]-a[this.dataset.name]
+
+                     });
+                 }
+                 // if(this.onoff){
+                 //     this.children[1].className='activeb';
+                 //     this.children[0].className='activet'
+                 // }
+                 // else {this.children[0].className='activet';
+                 //     this.children[1].className='activeb';
+                 // }
+                 this.onoff=!this.onoff;
+                //  render(newdata)
+                 newdata.forEach((item,i)=>{//样式转换
+                     li[item.id-1].style.left=ary[i].l+'px'
+                     li[item.id-1].style.top=ary[i].t+'px'
+                 })
+             }
+         })
+         //商城搜索
+         const sele=document.querySelector('#sele');
+         const num=document.querySelector('#num');
+         const txt=document.querySelector('#txt');
+         const btn=document.querySelector('#search');
+         const init=document.querySelector('#init');
+         // console.log(btn);            
+         btn.onclick=function(){
+             console.log(123)
+             let {value:v1}=start;//搜索对应数字开始框
+             let {value:v2}=end;//搜索对应数字结束框
+             let {value:v3}=sele//搜索对应选择框
+             let {value:v4}=txt1;//搜索对应文字框
+             // console.log(v1,v2,v3,v4);
+             
+             if(v4||v1&&v2){//v4有值或者v1和v2都有值
+                 var d ;
+                 if(v4){
+                     d=data.filter((item)=>{
+                         return item[v3].includes(v4)
+                     })
+                 }else{
+                     d=data.filter((item)=>{
+                         return item[v3]>=v1&&item[v3]<=v2
+                     })
+                 }
+                 render(d);
+                 // console.log(v3)
+                 init.onclick=function(){
+                     render( data)
+                 }
+             }else{//都没有值得时候
+                 alert('请输入有效的信息')
+             }
+         };
+         //当搜索内容切换的时候
+         sele.onchange=function(){
+             start.value=end.value=txt1.value='';
+             let {value}=this;
+             if(value==='title'){
+                 num.className='hide';
+                 tex1.className='show';
+             }
+             else{
+                 num.className='show';
+                 txt1.className='hide';
+             }
+         }
+         //商城css转换
+         const li=document.querySelectorAll('li');
+         let ary=[];//存放位置
+         li.forEach((ele,i)=>{
+            ary.push({
+                l:ele.offsetLeft,
+                t:ele.offsetTop,
+                id:data[i].id,
+            })
+            ele.style.left=ele.offsetLeft+'px';
+            ele.style.top=ele.offsetTop+'px';
+            ele.style.position='absolute';
+         })
+     })
+     </script>
+</body>
+</html>
