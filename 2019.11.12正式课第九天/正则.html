@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt"><button id="btn">发送</button>
+    <ul id="ul"></ul>
+    <script>
+        /* 
+        正则表达式：
+            专门检索字符串的一种规则,更擅长处理模糊返回的字符串.
+            难点:
+            规则->规律 ,现象 (需要大家总结)
+
+        写法:
+        /a/ 字面量写法
+        new RegExp(a规则【可以为字符串的，可以进行字符串拼接的】，修饰符) new写法
+         */
+         let str='abc';
+         let aa='a';
+         console.log(/a/)//找出字符串a
+         console.log(/aa/)//找的是字符串aa（正则里面放的是不带引号的字符串或者规则）
+         console.log(new RegExp(aa));//找的是变量aa 其实就是找字符串a
+          \转义字符 转的是\后面的字符 正则中特殊含义的字符转成字符本身（\\）不再有任何意义
+            \d 特殊转义符 0-9之间的数字 ascll码来编排的
+            \D 把所有的非数字提出来  
+            \n 代表换行
+            量词 +
+               :第一次出现的数字或者连续数字 最少一个 最多无限
+            修饰符:g  golbal 全局查找 
+                   i 大小写转换
+            
+         正则中的方法（只有正则身上有）
+         exec（字符串） 找到正则匹配的字符并放到数组中，只找一次（首次）
+                let str='dh89x1';
+                console.log(/1/.exec(str))//["1", index: 5, input: "dh89x1", groups: undefined] 1为找到的字符  index是数字出现的位置 input：整个字符串 groups ：undefined
+         test(字符串)查看字符串是否有某一项 有就返回true 没有就返回false
+                console.log(/1/.test(str))//true
+                console.log(/2/.test(str))//false
+         string.match(/ /)字符串的方法 把正则匹配到的字符放到数组中（返回值是数组）        与exec类似  
+                console.log(str.match(/\d/)) //["8", index: 2, input: "dh89x1", groups: undefined]
+                console.log(str.match(/\d+/))//["89", index: 2, input: "dh89x1", groups: undefined]
+                console.log(str.match(/\d+/g))//["89", "1"]
+                let str1='1124566zg456ffZ';
+                console.log(str1.match(/z/i))
+         string.replace(''或者正则，'替换字符'或者函数)替换（过滤敏感词）
+         replace的细节问题
+            默认情况下，函数的第一个参数是每次匹配项，第二个参数是匹配字符索引，第     三个是整个字符串，第四个是undefined 与exec相似
+        replace 的应用
+            let str6='冉某和某磊见不得光的新鲜事'
+            console.log(str6.replace(/冉某|某磊|不得光/g,function($0){
+                let temp='';
+                for(let i=0;i<$0.length;i++){
+                    temp+='*';
+                }
+                return temp;
+            }))
+        河蟹
+                btn.onclick=function(){
+                    let {value}=txt;
+                    let li=document.createElement('li');
+                    ul.innerHTML=`<li>${value}</li>`;
+                    value='';
+                    let sql=['卧槽','艹','羊驼'];
+                    let str='*%$#@^!';
+                    let re=new RegExp(sql.join('|'),'g')
+                    // console.log(re)
+                    value=value.replace(re,($0)=>{
+                        let temp='';
+                        for(let i=0;i<$0.length;i++){
+                            temp+=str[Math.round(Math.random()*str.(length-1))];
+                        }
+                        return temp;
+                        console.log(temp)
+                    })
+                }
+                console.log(value)
+            分组
+                分组（）一个括号代表一个分组从左往右数
+                如果分组的后面有量词，那么分组就是最后一个数
+                有了分组后 第一个参数是每次匹配项，第二个是第一个分组，只要有几个分组，参数就是分组项，直到分组读完就走正常的索引 整个数组 undefined
+        一道面试题
+                // 把2019/11/12换成2019年11月12日
+            方案一：
+                    let str='2019/11/12'
+                    // let ary=str.match(/\d+/g)
+                    // console.log(ary)
+                    // console.log(ary[0]+'年'+ary[1]+'月'+ary[2]+'日');
+            方案二：
+                    let s=str.replace(/((\d)+)\D+(\d+)\D+(\d+)/,function($0,$1,$2,$3,$4){
+                        console.log($0,$1,$2,$3,$4)//2019/11/12 2019 9 11 12
+                        return $1+'年'+$3+'月'+$4+'日'
+                    })
+                    console.log(s)
+             []   
+                [123] [1-3]在中括号的字符中找其一  要么1 要么2  要么3
+                小写英文[a-z]
+                大写英文[A-Z]
+                大小写英文[A-Za-z]
+                    // let str2='a1ca2ca3ca4c'
+                    // console.log(str2.match(/a[123]c/g));//["a1c", "a2c", "a3c"]
+                    // console.log(str2.match(/a[1-3]c/g));//["a1c", "a2c", "a3c"]
+                    let str2 = 'a1cA2ca3^b2b';
+                    console.log(str2.match(/[A-z]\d[A-z]/g));//[a1c,A2c,a3^,b2b]^也算是字母 在正则中
+                    console.log(str2.match(/[A-Za-z]\d[A-Za-z]/g));//[a1c,A2c,b2b]
+
+
+                注册账号年龄限制[16-108] 面试题
+                let str3='666';
+                console.log(/^(1[6-9]|[2-9][0-9]|10[0-8])$/.test(str3));//false
+                
+                ^代表字符串的开头 $代表字符串的结尾 ^+$=整个字符串都要匹配规则避免正则的惰性特性
+                计算出下列的字符字节，假设英文是1个字节，中文是2个字节
+                中文的区间范围：/[\u4e00-\u9fa5]/
+                let str4='大家好，我是渣渣辉，come on！';
+                let num=0;
+                for(let i=0;i<str4.length;i++){
+                    if(/[a-z.,!]/i.test(str[i])){
+                    if(!/[u4e00,u9fa5]/.test(str[i])){
+                        num++
+                    }
+                    else{
+                        num+=2
+                    }
+                }
+                console.log(num)
+            \d{}代表量词，描述{}前面字符的数量
+              {m,}最少m个最多不限
+              {m,n} 最少m个最多n个 
+              {n} 最少出现n次 最多出现n次 
+              ?最少可以没有 最多出现一次{0,1}
+              *最少可以没有最多无限{0，}
+                let str5='a12ca456ca6789c123456caca1c'
+                console.log(str5.match(/a\d{0,3}c/g))//[a12c,a456c,ac,a1c]
+                console.log(str5.match(/a\d{2}c/g))//[a12c]
+                console.log(str5.match(/a\d?c/g))//[ac,a1c]
+                console.log(str5.match(/a\d{0,1}c/g))//[ac,a1c]
+                console.log(str5.match(/a\d*c/g))//[a12c,a456c,a6789c,ac,a1c]
+                console.log(str5.match(/a\d{0,}c/g))//[a12c,a456c,a6789c,ac,a1c]
+            // ^在中括号中代表排除
+            let str7 = 'a12ca456ca6789ca123456caca1ca78c';
+            console.log(str7.match(/a[^123]+c/g))//[a456c,a6789c,ac,a78c]
+            console.log(str7.match(/a[^123]+c/g))
+            
+            
+            
+
+
+    </script>
+</body>
+</html>
