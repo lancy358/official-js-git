@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        padding:100px;
+    }
+    #box{
+        background: red;
+        _position: relative;
+    }
+    #box1{
+        background: green;
+        position: relative;
+        border:50px solid #000;
+    }
+    #box2{
+        background: skyblue;
+        position: absolute;
+        top:150px;
+        border:50px solid #000;
+    }
+</style>
+<body>
+        <div id="box">
+                <div id="box1">
+                    <div id="box2"></div>
+                </div>
+            </div>
+    <script>
+        /* 
+        获取样式表中的样式使用getComputedStyle(element).attr（属性）能获取看不见的属性
+        获取出来的值是带单位的
+        clientWidth/clientHeight 盒子的可视属性支持padding 不支持border
+        clientLeft/clientTop 左边框和上边框
+        offsetHeight /offsetWidth 盒子可视的宽高度（支持padding和border）
+        offsetParent 定位父级（元素）
+        offsetLeft/offsetTop 当前元素定位父级到当前元素的距离（左外边框到定位父级左内边框的距离（在页面复杂的情况下慎用）
+        绝对位置才是最稳的距离 当前元素到页面顶部的距离
+        scrollHeight scrollWidth 获取例如textarea（被内容撑开的） 的高度、宽度 计算padding 不计算border
+        scrollLeft、scrollTop、滚动条卷去的距离（当前滚动条的顶部到最开始的距离）
+
+        */
+        //封装一个方法 设置绝对距离
+        // 思路：通过当前元素，将当前元素与父级之间的距离都求出，然后求和。
+        // 具体实施：先设定一个当前元素 nowEle 然后求出当前元素与父级元素之间的定位距离和边框距离，offsetLeft/offsetTop+clientLeft/clientTop,然后将父级元素设置为当前元素，以此下去
+
+        function Tools(nowEle){
+            let l=0;
+            let t=0;
+            let cl=nowEle.clientLeft;
+            let tl=nowEle.clientTop;
+            while(nowEle){
+                l+=(nowEle.clientLeft+nowEle.offsetLeft)
+                t+=(nowEle.clientTop+nowEle.offsetTop)
+                nowEle=nowEle.offsetParent;
+            }
+            l=l-cl;
+            t=t-tl;
+            
+            return {
+                l,
+                t
+                }
+                console.log(l,t);
+                
+        }
+        let obj= Tools(box2)
+        console.log(obj)
+        
+    </script>
+</body>
+</html>
