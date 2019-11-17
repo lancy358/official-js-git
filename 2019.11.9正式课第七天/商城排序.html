@@ -59,7 +59,7 @@
             按照商品热度搜索 -->
     <script>
         fetch('./json/product.json').then(d=>d.json()).then(data=>{
-            // console.log(data.concat())
+            console.log(data.concat())
             let newdata=data.concat();//复制一个新数组,为了一会排序的的时候不影响原数组.
             function render(newdata){
                 let lis=newdata.map((item,i)=>{
