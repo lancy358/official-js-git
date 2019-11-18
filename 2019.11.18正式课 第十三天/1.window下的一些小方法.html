@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            height: 3000px;
+            width:2000px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        DOM:获取可视区的高度
+            
+            document.documentElement.clientHeight\clientWidth (如果有滚动条会减去滚动条的宽度、高度)
+            document.documentElement.scrollTop/Left 滚动条的距离
+            element.getBoundingCliengtRect()他返回的是一个对象，是元素到body的绝对位置，不管有没有定位
+        BOM：
+            window.innerHeight 可视区的高度
+            window.innerWidth(window)(如果有滚动条不会减去滚动条的宽度或高度)
+            
+            window.pageYOffset/pageXOffset 滚动条的距离 
+            
+    -->
+    <script>
+        console.log(document.documentElement.clientHeight)
+        console.log(window.innerHeight)
+        console.log(document.documentElement.clientWidth)
+        console.log(window.innerWidth)
+        console.log(document.documentElement.scrollLeft)
+        console.log(pageXOffset)
+
+    </script>
+</body> 
+</html>
