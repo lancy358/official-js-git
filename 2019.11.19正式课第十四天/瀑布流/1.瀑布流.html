@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(243, 230, 230);
+        }
+
+        #box {
+            margin: 0 auto;
+            width: 1244px;
+        }
+
+        .head {
+            width: 100%;
+            height: 142px;
+            overflow: hidden;
+        }
+
+        .head li {
+            float: left;
+            width: 230px;
+            height: 126px;
+            margin: 0 16px 16px 0;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .head li img {
+            width: 100%;
+        }
+
+        .body {
+            width: 100%;
+        }
+
+        .body li {
+            float: left;
+            width: 230px;
+            margin: 0 16px 16px 0;
+            border-radius: 5px;
+        }
+
+        .body li div {
+            transition: all 0.2s;
+            margin-bottom: 16px;
+            background: #fff;
+        }
+
+        .body li div:hover {
+            box-shadow: 0px 5px 6px 6px #ccc;
+            transform: translateY(-2px)
+        }
+
+        .img_box {
+            width: 100%;
+        }
+
+        .img_box img {
+            width: 100%;
+            /* opacity: 0; */
+            transition: .5s;
+        }
+
+        .img_box .desc {
+            font-size: 15px;
+            padding: 0 10px;
+            color: #ccc;
+            height: 35px;
+            line-height: 35px;
+            border-bottom: 1px solid #f2f2f2;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .img_box .author {
+            font-size: 15px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul class="head">
+            <li><img src="./img/head1.png" alt=""></li>
+            <li><img src="./img/head2.jpg" alt=""></li>
+            <li><img src="./img/head3.jpg" alt=""></li>
+            <li><img src="./img/head4.jpg" alt=""></li>
+            <li><img src="./img/head5.jpg" alt=""></li>
+        </ul>
+        <ul class="body">
+            <li>
+                <!-- <div class="img_box">
+                    <img src="./img/1.jpg" alt="">
+                    <p class="desc">所谓伊人，在水一方！</p>
+                    <p class="author">泰勒·斯威夫特</p>
+                </div> -->
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        const lis = document.querySelectorAll('.body li');
+        const ul = document.querySelector('.body');
+        //console.log(lis, ul)
+        const head = document.querySelector('.head')
+
+        fetch('./data.json').then(d => d.json()).then(data => {
+            //console.log(data)
+            let newdata = data.splice(0)
+            console.log(newdata)
+            function render(newdata) {
+                newdata.forEach((item, index, all) => {
+                    let num = index % 5;
+                    // console.log(item)
+                    let str = `
+                        <div class="img_box">
+                            <img src="${item.pic}" alt="">
+                            <p class="desc">${item.desc}</p>
+                            <p class="author">${item.author}</p>
+                        </div>
+                    `
+                    // console.log(str)
+                    // console.log(lis[num].innerHTML)
+                    lis[num].innerHTML = lis[num].innerHTML + str;
+                //     setTimeout(()=>{
+                //     img.style.opacity=1
+                // })
+                })
+            }
+            render(newdata)
+        })
+       //找到函数的lis中最小的元素及其索引和值
+        function minLis(lis){
+            let ary=[...lis].map(ele=>ele.scrollHeight);
+            let min=Math.min(...ary);
+            console.log(min)
+            let index=ary.findIndex(item=>item===min);
+            return 
+                {
+                    ele:lis[index], //最短的元素
+                    min,//最短的高度值
+                    index//最短的索引
+                }
+        }
+        let ih=window.innerHeight;
+        function debounce(fn,time){
+            let timer;
+            return function(...arg){
+                if(timer){
+                    clearTimeout(timer)
+                }else{
+                    timer=setTimeout(()=>{
+                        fn.call(this,...arg)
+                    },time)
+                }
+            }
+        }
+        function throttling(fn,time){
+            let prevtime=0;
+            let nowtime=+new Date
+            return function(...arg){
+                if((nowtime-prevtime)>time){
+                    fn.call(this,...arg)
+                }
+            }
+            prevtime=nowtime
+        }
+        // window.onscroll=debounce(fn,200)  //防抖
+        window.onscroll=throttling(fn,200)//节流
+        function fn(){
+            console.log(1)
+            if(box.scrollHeight<ih)return //防止已加载的时候就有滚动条滑动
+            let {min}=minLis(lis);
+            let scroll=window.pageYOffset;
+            if(ih+scroll>=min+head.offsetHeight){
+                render()
+
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
