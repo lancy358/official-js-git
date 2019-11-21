@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(243, 230, 230);
+        }
+
+        #box {
+            margin: 0 auto;
+            width: 1244px;
+        }
+
+        .head {
+            width: 100%;
+            height: 142px;
+            overflow: hidden;
+        }
+
+        .head li {
+            float: left;
+            width: 230px;
+            height: 126px;
+            margin: 0 16px 16px 0;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .head li img {
+            width: 100%;
+        }
+
+        .body {
+            width: 100%;
+        }
+
+        .body li {
+            float: left;
+            width: 230px;
+            margin: 0 16px 16px 0;
+            border-radius: 5px;
+        }
+
+        .body li div {
+            transition: all 0.2s;
+            margin-bottom: 16px;
+            background: #fff;
+        }
+
+        .body li div:hover {
+            box-shadow: 0px 5px 6px 6px #ccc;
+            transform: translateY(-2px)
+        }
+
+        .img_box {
+            width: 100%;
+        }
+
+        .img_box img {
+            width: 100%;
+            /* opacity: 0; */
+            transition: .5s;
+        }
+
+        .img_box .desc {
+            font-size: 15px;
+            padding: 0 10px;
+            color: #ccc;
+            height: 35px;
+            line-height: 35px;
+            border-bottom: 1px solid #f2f2f2;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .img_box .author {
+            font-size: 15px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul class="head">
+            <li><img src="./img/head1.png" alt=""></li>
+            <li><img src="./img/head2.jpg" alt=""></li>
+            <li><img src="./img/head3.jpg" alt=""></li>
+            <li><img src="./img/head4.jpg" alt=""></li>
+            <li><img src="./img/head5.jpg" alt=""></li>
+        </ul>
+        <ul class="body">
+            <li>
+                <!-- <div class="img_box">
+                    <img src="./img/1.jpg" alt="">
+                    <p class="desc">所谓伊人，在水一方！</p>
+                    <p class="author">泰勒·斯威夫特</p>
+                </div> -->
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script>
+        class Tools{
+            getMin(obj){
+                // return 11
+                // this.ary=[...obj].map(ele=>{
+                //         ele.scrollHeight
+                //     })
+
+                if (!Array.isArray(obj)) {
+            obj = [...obj].map((item) => {
+                return item.scrollHeight;
+            });
+        }
+
+
+                    // console.log(this.ary)
+                let min=Math.min(...obj)
+                // console.log(min)
+                let index=obj.findIndex(ele=>ele===min)
+                console.log(min,index)
+                return
+                    {
+                        min,index
+                    }
+            }
+
+            
+            throttling(cb,time){
+                    let prevtime=0;
+                    return function(...arg){
+                        let now=new Date;
+                    if(now-prevtime>time){
+                        cb.call(this,...arg)
+                    }
+                        prevtime=now;
+                    }
+            }
+            debounce(cb,time){
+                let timer;
+                return function(...arg){
+                    if(timer){
+                    clearTimeout(timer);
+                }
+                
+                timer=setTimeout(()=>{
+                        cb.call(this,...arg)
+                    },time)
+                }
+            }
+        }
+        class pbl extends Tools{
+            constructor(name){
+                super();
+                this.box=document.querySelector(name);
+            //   console.log(box)
+                this.lis=this.box.querySelectorAll('li');
+                console.log(this.lis);
+                this.ih=window.innerHeight;
+                this.bodyt=this.box.offsetTop
+
+            }
+            api(url,cb){
+                let that=this;
+                fetch(url).then(d=>d.json()).then(data=>{
+                    cb.call(that,data)
+                })
+            }
+            render(){
+                this.api('./data.json',function(data){
+                    console.log(data)
+                    data.forEach((d,i )=> {
+                        let { index }=this.getMin(this.lis);
+                        // console.log(this.lis)
+
+                        console.log(this.getMin(this.lis))
+                        this.div=this.create(d)
+                        this.lis[index].append(div);
+                    });
+                })
+            }
+            create({pic,desc,author,height}){
+                let div=document.createElement('div');
+                div.className='img_box';
+                div.html=
+                `
+                    <img height="${height}" src="${pic}" alt="">
+                    <p class="desc">${desc}</p>
+                    <p class="author">${author}</p>
+                `
+                return div
+            }
+            scroll(){
+                let fn =()=>{
+                    let { index }=this.getMin(this.lis);
+                    if(window.pageYOffset+this.ih>this.min+this.bodyt){
+                        this.render()
+                    }
+                }
+            }
+        }
+      let n=new pbl('.body');
+      
+      n.render();
+      n.scroll();
+    </script>
+</body>
+
+</html>
