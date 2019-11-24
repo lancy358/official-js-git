@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            float: left;
+        }
+        #box1 {
+            width: 350px;
+            height: 350px;
+            border: 1px solid #000;
+            position: relative;
+
+        }
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background:rgba(255,125,175,.5);
+            position: absolute;
+            left: 0;
+            top: 0;
+            display:none;
+            cursor:move;
+        } 
+        #box3 {
+            width:500px;
+            height: 500px;
+            border:1px solid #000;
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+        #bigPic{
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1">
+        <img src="./1.jpg" alt="" id="pic">
+        <div id="box2"></div>
+    </div>  
+    <div id="box3">
+        <img src="./2.jpg" alt="" id="bigPic">
+    </div>
+    <script>
+        box1.onmouseover=function(ev){
+            box2.style.display=box3.style.display='block';
+            
+
+        }
+        box1.onmouseout=function(ev){
+            box2.style.display=box3.style.display='none';
+        }
+        box1w=box1.clientWidth;//box1的宽度
+        box1h=box1.clientHeight;
+        box1.onmousemove=function(ev){
+            // console.log(ev)
+            let w=ev.clientX-box2.clientWidth/2;//box2的移动距离
+            let h=ev.clientY-box2.clientHeight/2;
+            // console.log(w,h)
+            if(w<0){//限制box2的移动距离
+                w=0;
+            }else if(w>box1w-box2.clientWidth){
+                w=box1w-box2.clientWidth;
+            }
+            if(h<0){
+                h=0;
+            }else if(h>box1h-box2.clientHeight){
+                h=box1h-box2.clientHeight;
+            }
+            // console.log(w,h)
+
+            box2.style.top=ev.clientY-box2.clientHeight/2+'px';
+            box2.style.left=ev.clientX-box2.clientWidth/2+'px';
+            console.log(box2.style.top,box2.style.left)
+            let scalex=w/box1w-box2.clientWidth;
+            let scaley=h/box1h-box2.clientHeight;
+            bigPic.style.top=scaley*(box3.clientHeight-bigPic.offsetHeight)+'px'
+            bigPic.style.left=scalex*(box3.clientWidth-bigPic.offsetWidth)+'px'
+
+
+        }
+        
+       
+    </script>
+</body>
+</html>

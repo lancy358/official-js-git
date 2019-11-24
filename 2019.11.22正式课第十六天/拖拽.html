@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+            }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+       box.onmousedown=function(ev){
+           let distanceX=ev.pageX-box.offsetLeft;//按下之前点到盒子边的距离
+           let distanceY=ev.pageY-box.offsetTop;
+           document.onmousemove=function(ev){//用document目的是鼠标速度快就会脱离盒子
+                box.style.top=ev.pageY-distanceY+'px';//
+                box.style.left=ev.pageX-distanceX+'px'
+           }
+           document.onmouseup=function(){
+            document.onmousemove=null;//鼠标能够脱离盒子
+           }
+       }
+    </script>
+</body>
+</html>

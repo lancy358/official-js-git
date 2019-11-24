@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            outline: none;
+        }
+        #box {
+            width:100px;
+            height: 100px;
+            display: none;
+        }
+       #ipt {
+           /* left: 100px;
+           top:6px;
+           position: fixed; */
+           border: 1px solid green;
+           
+       }
+       #btn {
+           display: inline-block;
+       }
+       .ok{
+           border: 1px solid green;
+       }
+       .error{
+           border:1px solid red;
+       }
+       p{
+           display: none;
+           color: red;
+           font-size: 16px;
+       }
+    </style>
+</head>
+<body>
+    <!-- <button id="btn">详情12345</button> -->
+    <div id="box"></div>
+    <input type="text" placeholder="我是输入框" id="ipt"> <span id="span">0/10字</span>
+    <p id="p"></p>
+
+    <script>
+
+    //    btn.onmouseover=function(){
+    //        console.log(btn.innerText)
+    //         prev=btn.innerText
+    //        btn.innerText='成功'
+    //         // ipt.style.display='none'
+    //         ipt.value='划上'
+
+    //    }
+    //    btn.onmouseout=function(){
+    //     btn.innerText=prev;
+    //     // ipt.style.display='block';
+    //     ipt.value='划出'
+
+    //    }
+        let num=0
+        ipt.onkeyup=function(){
+            
+            // num++
+            // num<=10;
+            // if(/^([\u4e00-\u9fa5]|\w){0,10}$/.test(this.value)){
+               
+            //     span.innerText=`${num}/10字`
+            //     ipt.style.border='1px solid green'
+            // }else{
+            //     ipt.style.border='1px solid red'
+            // }
+            let len=ipt.value.length
+            span.innerText=`${len}/10字`
+            p.innerText=`超出了${len-10}个字`
+            if(len>10){
+                ipt.style.border='1px solid red'
+                p.style.display='block'
+            }
+            else{
+                p.style.display='none'
+                ipt.style.border='1px solid green'
+
+            }
+        }
+    </script>   
+</body>
+</html>

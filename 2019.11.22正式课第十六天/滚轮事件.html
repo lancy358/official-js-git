@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    // function addmouseWeel(obj,cb){
+    //     if(obj.onmousewheel===null){
+    //         obj.onmousewheel=listen
+    //     }else{
+    //         obj.addEventListener('DOMMouseScroll',listen)
+    //     }
+    //     function listen(ev){
+    //         let o=false;//控制大小
+    //         console.log(ev.wheelDelta)
+    //         if(ev.wheelDelta){
+    //             o=ev.wheelDelta>0?true:false;//谷歌浏览器
+    //             // console.log(o)//
+    //         }else{
+    //             o=ev.wheelDelta<0?true:false;//火狐浏览器
+    //         }
+    //         cb.call(this,o)//回调函数
+    //         console.log(this)//box
+    //     }
+    // }
+    // addmouseWeel(box,function(o){
+    //     let {width,height}=getComputedStyle(this);//box
+    //     console.log(width)
+    //     if(o){
+    //         this.style.width=parseFloat(width)+5+'px';
+    //         this.style.height=parseFloat(height)+5+'px'
+    //     }else{
+    //         this.style.width=parseFloat(width)-5+'px';
+    //         this.style.height=parseFloat(height)-5+'px'
+    //     }
+    // })
+    // onscroll=function(ev){
+    //     ev.returnValue=false
+    // }
+    function addweel(obj,fn){
+        if(obj.onmousewheel===null){
+            obj.onmousewheel=listen;
+        }else{
+            obj.addEventListener('DOMMouseWheel',listen)
+        }
+        function listen(ev){
+        let o=false;
+        if(ev.wheelDelta){
+            o=ev.wheelDelta>0?true:false;//guge
+        }else{
+            o=ev.wheelDelta<0?true:false;//huohu
+        }
+        fn.call(this,o)
+        }
+    }
+    addweel(box,function(o){
+        console.log(o)
+        let {width,height}=getComputedStyle(this)
+        if(o){
+            this.style.width=parseFloat(width)+5+'px';
+            this.style.height=parseFloat(height)+5+'px';
+        }else{
+            this.style.width=parseFloat(width)-5+'px';
+            this.style.height=parseFloat(height)-5+'px';
+        }
+    })
+</script>
+</html>

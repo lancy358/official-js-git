@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+            border: 1px solid #000;
+            position: absolute;
+            display: none;
+            left: 0;
+            top: 0;
+        }
+        ul li{
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-bottom: 1px dashed #000;
+        }
+        ul li:hover{
+            background-color:gray;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+        浏览器默认行为：
+            有些行为是浏览器自带的 
+            要阻止默认行为要知道是什么事件导致的
+            然后通过ev.returnValue=false来阻止（优选）
+            或者直接return false
+            或者
+            ev.preventDefault（）事件绑定使用
+            oncontextmenu 鼠标右键
+        -->
+        <!-- <input type="text" id="txt">
+        <img src="./timg.jpg" alt="" id="img"> -->
+        <a href="http://www.baidu.com" id="aa">百度</a>
+        <ul id="ul"> 
+            <li>我的帖子</li>
+            <li>用户管理</li>
+            <li>我的关注</li>
+            <li>我的照片</li>
+        </ul>
+        <script>
+            // document.onkeydown=function(ev){
+            //     if(ev.keyCode===32){
+            //         console.log(ev)
+            //         ev.returnValue=false// 阻止空格键的默认行为
+            //     }
+            // }
+            // txt.onkeydown=function(ev){
+            //     console.log(1)
+            //     ev.returnValue=false//阻止input框的默认输入行为
+            // }
+            // img.onmousedown=function(ev){
+            //     ev.returnValue=false//阻止图片的默认行为
+            // }
+            aa.onclick=function(ev){
+                ev.returnValue=false//阻止标签跳转
+                // return false
+            }
+                document.oncontextmenu=function(ev){
+                    ul.style.cssText=`display:block;top:${ev.clientY}px;left:${ev.clientX}px;`
+                    return false//阻止右键默认的行为
+                }
+                ul.addEventListener('click',function(ev){
+                    console.log(ev.target.innerHTML)
+                    // ev.cancelBubble=true;
+                        ev.stopPropagation()
+                },false)
+                document.addEventListener('click',function(){
+                    ul.style.display='none'
+                },false)
+
+
+
+        </script>
+</body>
+</html>

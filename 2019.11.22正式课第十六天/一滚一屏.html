@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html body{
+            overflow: hidden;
+        }
+        #ul{
+            position: absolute;
+            left:0;
+            height: 0;
+            list-style: none;
+            transition: 1s;
+        }
+    </style>
+</head>
+<body>
+    <ul id="ul">
+
+    </ul>
+    <script>
+        let ary=['green','yellow','hotpink','red'];
+        const w=window.innerWidth;
+        const h=window.innerHeight;
+        let html=ary.map(item=>`<li style=width:${w}px;height:${h}px;background:${item}></li>`).join('');
+        ul.innerHTML=html
+        let num=0;
+        function addwheel(obj,cb){//cb是throttling函数
+            if(obj.onmousewheel===null){
+                obj.onmousewheel=listen;
+            }else{
+                obj.addEventListener('DOMMouseScroll',listen)
+            }
+            function listen(ev){
+                let o=false;
+                if(ev.wheelDelta){
+                    console.log(ev.wheelDelta)
+                    o=ev.wheelDelta>0?true:false;
+                }else{
+                    o=ev.wheelDelta<0?true:false;
+                }
+                cb.call(this,o)
+                // console.log(this) obj
+            }
+        }
+        function throttling(cb,time){//cb是fn
+            let prevtime=0;
+            return function(...arg){
+                let now=new Date;
+                if(now-prevtime>time){
+                    cb.call(this,...arg)//arg是o
+                }
+            }
+            prevtime=now;
+        }
+        function fn(o){
+            
+            if(o){//上滑
+                num--;
+                if(num<0){
+                    num=0;
+                }
+            }else{//下滑
+                num++
+                if(num>ary.length-1){
+                    num=ary.length-1
+                }
+            }
+            ul.style.top=-h*num+'px'
+        }
+        addwheel(document,
+        throttling(fn,1000));
+
+        
+        
+       
+
+    </script>
+</body>
+</html>
