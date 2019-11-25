@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function myquery(){
+        //     return new $() //不能在外面new 但是在里面new又是函数递归 所以找了替身$函数
+        // }
+        // function $(){//myquery 的替身
+
+        // }
+        // myquery.prototype={
+        //     v:'x.0',
+        //     constructor:myquery,
+        //     css :function(){
+        //         console.log(1)
+        //     }
+        // }
+        // $.prototype=myquery.prototype
+        
+        // myquery().css()
+        // fn.init=function $(){
+        //     return new myquery()
+        // }
+
+        // function myquery(){
+        //     alert(1)
+        // }//myquery 在外面容易被污染
+        // // let $=myquery() //$()=>new
+        // myquery().css()
+        (function(global,factory){
+            factory(global)
+        })(this,function(global,noGlobal){
+            console.log(noGlobal)//形参global和noGlobal 函数只传了实参global所以 noGrobal是undefined
+            function myquery(){
+                return new fn.init()
+            }
+            let fn=myquery.prototype={
+                v:'x.0',
+                constructor:myquery,
+                css:function(){
+                    console.log(1)
+                }
+            }
+            fn.init=function(){
+
+            }
+            fn.init.prototype=myquery.prototype//让实例化对象拥有myquery方法
+            window.myquery=$=myquery //让外界能够调用myquery方法
+        })
+        $().css()
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <input type="text">
+        <button>按钮</button>
+        <ul></ul>
+    <script src="../Q/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        let num=0
+        $(':button').click(function(){
+            // console.log(1)
+            let $li=$('<li>'+ num++ +'</li>').css({
+                width:30,
+                height:30
+            })
+            console.log($li)
+            $li.click(function(){
+            $(this).remove()
+        })
+        // $('ul').append($li).css('border','1px solid #000')
+        $li.appendTo($('ul')).css('border','1px solid #000')
+        $('ul').prepend($li)//每次插入都在第一个
+        
+        })  
+        
+    </script>
+
+</body>
+</html>
