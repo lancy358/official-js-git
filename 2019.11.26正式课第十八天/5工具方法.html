@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="text"></textarea>
+    <script src="Q/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        /* 
+        $.xx 工具方法
+        $.each 循环
+        $.ajax 数据请求
+        
+         */
+         https://www.baidu.com/s?wd=hhe&rsv_spt=1&rsv_iqid=0x8d17d87c00092694&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=0&rsv_dl=tb&rsv_sug3=4&rsv_sug1=1&rsv_sug7=100&prefixsug=hhe&rsp=1&inputT=5449&rsv_sug4=8320
+         $.ajax({
+             url:'www.baidu.com/s?',
+             data:{
+                rsv_spt:1,
+                rsv_iqid:'0x8d17d87c00092694',
+                f:8,
+                wd:'s',
+               
+             },
+             dataType:'jsonp',
+             success:function(d){
+                console.log(d)
+             }
+
+         })
+        
+    </script>
+</body>
+</html>

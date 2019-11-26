@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="text"></textarea>
+    <script src="../Q/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        //$.extend() 工具方法 扩展插件用
+        $.extend({//扩展插件使用
+            trimLeft:function(str){
+                return str.replace(/^\s+/,'')
+            }
+        })
+        console.log($.trimLeft('   12345'))
+        //$.fn.extend() 功能方法 
+        $.fn.extend({
+            scrollH:function(){
+                return this[0].scrollHeight
+            }
+        })
+        $(document).click(function(){
+        console.log($('#text').scrollH())
+        })
+    </script>
+</body>
+</html>

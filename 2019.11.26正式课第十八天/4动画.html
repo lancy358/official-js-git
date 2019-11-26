@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       div{
+           width: 100px;
+           height: 100px;
+           background: red;
+       }
+    </style>
+</head>
+<body>
+    <button>按钮</button>
+    <div></div>
+    <script src="../Q/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+
+        // $('div').click(function(){
+        //     $('div').animate({
+        //         width:300,
+        //     })
+        // })
+        $('button').click(function(){
+            // $('div').hide(1000) 
+            // $('div').toggle(1000) 开的关 关的开
+            // $('div').slideToggle(1000) //改变高度
+            $('div').fadeToggle(1000)//若影若现
+
+        })
+        $('div').click(function(){
+            $('div').delay(1000).animate({//延迟
+                width:300,
+            })
+        })
+    </script>
+</body>
+</html>

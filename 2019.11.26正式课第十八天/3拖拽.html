@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            }
+        #box2{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* display: none; */
+            opacity: .3;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="box"></div>
+    <!-- <div id="box2"></div> -->
+    <script src="Q/node_modules/jquery/dist/jquery.js"></script>
+    <script>
+
+        // $('#box').mousedown(function(ev){
+        //     let disX=ev.pageX-$('#box').offset().left
+        //     let disY=ev.pageY-$('#box').offset().top
+        //     console.log(disX)
+        //     $(document).mousemove(function(ev){
+        //         console.log('移动')
+        //         $('#box').css({
+        //         top:ev.pageY-disY,
+        //         left:ev.pageX-disX,
+        //         })
+        //     })
+        //     $(document).mouseup(function(){
+        //         $(document).off('mousemove');
+        //         $(document).off('mouseup')
+
+        // })
+        // })
+        
+        $('#box').mousedown(function(ev){
+            let $div=`<div id="box2"></div>`
+            
+            // console.log($('body'))
+            $('#box2').css({
+                left:$('#box').offset().left,
+                top:$('#box').offset().top,
+                
+            })
+            $('body').append($div)
+            // console.log($div)
+            let disX=ev.pageX-$('#box').offset().left
+            let disY=ev.pageY-$('#box').offset().top
+             console.log(disX)
+            
+            $(document).mousemove(function(ev){
+                console.log('yidong')
+                let t=ev.pageY-disY
+                if(t<100){
+                    t=0
+                }
+                $('#box2').css({
+                    top:t,
+                    left:ev.pageX-disX,
+                })
+            })  
+            $(document).mouseup(function(ev){
+                console.log('taiqi')
+                $(document).off('mousemove');
+                $(document).off('mouseup');
+                $('#box').css({
+                    left:$('#box2').offset().left,
+                    top:$('#box2').offset().top,
+                })
+                $('#box2').remove()//box2清除
+            })
+            return false
+        })
+    </script>
+</body>
+</html>
