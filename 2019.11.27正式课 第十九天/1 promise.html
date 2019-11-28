@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       
+        // let a=10;
+        // let p=new promise(function(resolve,reject){
+        //     setTimeout(()=>{
+        //         a=20
+        //         resolve(a)
+        //     },3000)
+        // })
+        // p.then(function(a){
+        //     console.log(a)
+        //     console.log(1000)
+        // },function(){
+
+        // }).finally(function(){
+        //     console.log('都来')
+        // })
+        // console.log(a)
+        // const first = () => (new Promise((resolve, reject) => {
+        //     console.log(3);
+        //     let p = new Promise((resolve, reject) => {
+        //         console.log(7);
+        //         setTimeout(() => {
+        //             console.log(5);
+        //             resolve(6);
+        //         }, 0)
+        //         resolve(1);
+        //     });
+        //     resolve(2);
+        //     p.then((arg) => {
+        //         console.log(arg);
+        //     });
+        // }));
+        // first().then((arg) => {
+        //     console.log(arg);
+        // });
+        // console.log(4);
+        let p=new Promise(function(resolve,reject){
+                // setTimeout(()=>{
+                //     b=10
+                // },0);
+                try{
+                    b
+                }catch(b){
+                    reject(b)
+                }
+
+            });
+            p.then(function(){
+
+            },function(){
+                console.log('shibai')
+            }).finally(function(b){
+                console.log('shibai')
+            })
+        // console.log(JSON.parse('{"name":"zhufeng"}'))
+        // console.log(JSON.stringify({name:"zhufeng",a:undefined,fn:function(){},b:null}))
+    </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../Q/node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        // function myFetch(url) {
+        //     return new Promise((resolve,reject)=>{
+        //         $.ajax({
+        //             url,
+        //             success:function(data){
+        //                 resolve(data)
+        //             },
+        //             error:reject,
+        //         })
+        //     })
+        // }
+        // let p=Promise.race([myFetch('./1.json'),myFetch('./2.json')]);
+        // p.then((data)=>{
+        //     console.log(data)
+        // },()=>{
+        //     console.log('error')
+        // })
+        //Promise.race的异步性
+        var resolvedPromisesArray = [Promise.resolve(33), Promise.resolve(44)];
+        var p = Promise.race(resolvedPromisesArray);
+        // immediately logging the value of p
+        console.log(p);// Promise { <state>: "pending" }
+        // using setTimeout we can execute code after the stack is empty
+        setTimeout(function () {
+            console.log('the stack is now empty');// the stack is now empty
+            console.log(p);// Promise { <state>: "fulfilled", <value>: 33 }
+        });
+        //使用 Promise.race –  setTimeout 的示例
+        var p1 = new Promise(function (resolve, reject) {
+            setTimeout(resolve, 500, "one");
+        });
+        var p2 = new Promise(function (resolve, reject) {
+            setTimeout(resolve, 100, "two");
+        });
+
+        Promise.race([p1, p2]).then(function (value) {
+            console.log(value); // "two"
+            // 两个都完成，但 p2 更快
+        });
+
+        var p3 = new Promise(function (resolve, reject) {
+            setTimeout(resolve, 100, "three");
+        });
+        var p4 = new Promise(function (resolve, reject) {
+            setTimeout(reject, 500, "four");
+        });
+
+        Promise.race([p3, p4]).then(function (value) {
+            console.log(value); // "three"
+            // p3 更快，所以它完成了              
+        }, function (reason) {
+            // 未被调用
+        });
+
+        var p5 = new Promise(function (resolve, reject) {
+            setTimeout(resolve, 500, "five");
+        });
+        var p6 = new Promise(function (resolve, reject) {
+            setTimeout(reject, 100, "six");
+        });
+
+        Promise.race([p5, p6]).then(function (value) {
+            // 未被调用             
+        }, function (reason) {
+            console.log(reason); // "six"
+            // p6 更快，所以它失败了
+        });
+    </script>
+</body>
+
+</html>
