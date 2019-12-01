@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/yun.css">
+    
+</head>
+<body class="body">
+    <div id="box">
+        <header id="head">
+            <div id="top">
+                <h1 class="title">
+                    <a href="" title="文件管理系统"><img src="./img/24ac8271356d42850fb56cdc3828ab69.jpg" alt=""></a>
+                </h1>
+                <div class="right">
+                    <div class="user">
+                        <span><img src="./img/u=4079222568,4243283989&fm=26&gp=0.jpg" alt=""></span>
+                        <i></i>
+                    </div>
+                    <div class="gap"></div> 
+                    <div class="set"></div>
+                </div>
+            </div>
+            <div id="nav">
+                <ul class="nav_left">
+                    <li><i></i>下载</li>
+                    <li><i></i>分享</li>
+                    <li id="remove">移动到</li>
+                    <li id="reset">重命名</li>
+                    <li id="del">删除</li>
+                    <li id="creat">新建文件夹</li>
+                    <li><i></i></li>
+                </ul>
+                <div class="nav_right">
+                    <div class="show_mode"></div>
+                    <!-- <div class="sort_mode">
+                        <i></i>
+                        <div class="cover"></div>
+                        <ul>
+                            <li>按时间排列</li>
+                            <li>按字母排列</li>
+                            <li>显示缩略图</li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </header>
+        <aside id="model-tree">
+
+        </aside>
+        <section id="section">
+                <div class="tree-menu" class="fix" onselectstart="return false;">
+                        <ul>
+                       <li>
+                           <div class="tree-title tree-ico open">
+                               <span><i></i>微云</span>
+                           </div>
+                           <ul>
+                               <li>
+                                   <div class="tree-title tree-ico close">
+                                       <span><i></i>我的文档</span>
+                                   </div>
+                               </li>
+                               <li>
+                                   <div class="tree-title tree-ico close">
+                                       <span><i></i>我的音乐</span>
+                                   </div>
+                               </li>
+                               <li>
+                                   <div class="tree-title tree-ico-none ">
+                                       <span><i></i>123</span>
+                                   </div>
+                               </li>
+                           </ul>
+                       </li> 
+                       <!-- 以下 左tree 是展开 -->
+                        <!-- <li>
+                           <div class="tree-title tree-ico open">
+                               <span><i></i>微云</span>
+                           </div>
+                           <ul>
+                               <li>
+                                   <div class="tree-title tree-ico open">
+                                       <span><i></i>我的文档</span>
+                                   </div>
+                                   <ul>
+                                       <li>
+                                           <div class="tree-title tree-ico-none">
+                                               <span><i></i>js程序设计</span>
+                                           </div>
+                                       </li>
+                                       <li>
+                                           <div class="tree-title tree-ico-none">
+                                               <span><i></i>js权威指南</span>
+                                           </div>
+                                       </li>
+                                   </ul>
+                               </li>
+                               <li>
+                                   <div class="tree-title tree-ico open">
+                                       <span><i></i>我的音乐</span>
+                                   </div>
+                                   <ul>
+                                       <li>
+                                           <div class="tree-title tree-ico open">
+                                               <span><i></i>周杰伦</span>
+                                           </div>
+                                           <ul>
+                                               <li>
+                                                   <div class="tree-title tree-ico-none">
+                                                       <span><i></i>发如雪</span>
+                                                   </div>
+                                               </li>
+                                               <li>
+                                                   <div class="tree-title tree-ico-none">
+                                                       <span><i></i>夜曲</span>
+                                                   </div>
+                                               </li>
+                                               <li>
+                                                   <div class="tree-title tree-ico-none">
+                                                       <span><i></i>稻香</span>
+                                                   </div>
+                                               </li>
+                                           </ul>
+                                       </li>
+                                       <li>
+                                           <div class="tree-title tree-ico">
+                                               <span><i></i>王杰</span>
+                                           </div>
+                                       </li>
+                                       <li>
+                                           <div class="tree-title tree-ico">
+                                               <span><i></i>张国荣</span>
+                                           </div>
+                                       </li>
+                                   </ul>
+                               </li>
+                               <li>
+                                   <div class="tree-title tree-ico-none ">
+                                       <span><i></i>123</span>
+                                   </div>
+                               </li>
+                           </ul>
+                       </li>  -->
+                    </ul> 
+               </div>
+               <div class="folder-content">
+                   <div class="breadmenu">
+                       <div class="checkall">
+                           <i id="checkedAll"></i>
+                       </div>
+                       <div class="bread-nav" onselectstart="return false;">
+                           <!-- 这个是操作的东西 -->
+                           <!-- <a href="javascript">微云</a>
+                               <span>我的文档</span> -->
+                       </div>
+                   </div>
+                   <div class="f-empty"></div>
+                   <div id="yj-list">
+                       <span class="dl">下载</span>
+                       <span class="mv">移动到</span>
+                       <span class="de">删除</span>
+                       <span class="rn">重命名</span>
+                       <span class="sh">分享</span>
+                   </div>
+                   <div id="fBox">
+                       <div class="folders">
+                           <!-- 这个是操作的东西 -->
+                           <!-- <div class="file-item active">
+                                   <img src="img/folder-b.png" alt="" />
+                                   <span class="folder-name">JS基础课程</span>
+                                   <input type="text" class="editor"/>
+                                   <i class="checked"></i>
+                               </div> -->
+                       </div>
+                       <div class="kuang"></div>
+                   </div>
+                </div>
+        </section>
+        <div class="modal-tree">
+                <h2>选择存储位置</h2>
+                <p class="folderName">我的文档</p>
+                <div class="content">
+                </div>
+                <div class="footer">
+                    <input type="button" name="" class="cancel" value="取消">
+                    <input type="button" name="" class="ok" value="确定">
+                    <p class="tip"></p>
+                </div>
+                <i class="icon_close"></i>
+            </div>
+        
+        <!-- <div id="tanBox">
+                <div class="conf">
+                        <i class="close-ico">X</i>
+                        <h3 class="conf-title">删除文件</h3>
+                        <div class="conf-content">
+                            确定要删除文件吗？
+                        </div>
+                        <div class="conf-btn">
+                            <a href="javascript:;">确定</a>
+                            <a href="javascript:;">取消</a>
+                        </div>
+                    </div>
+        </div> -->
+     
+    </div>
+    <script src="../Q/node_modules/jquery/dist/jquery.js"> </script>  
+    <script src="yun.js"> </script>
+       
+   
+</body>
+</html>

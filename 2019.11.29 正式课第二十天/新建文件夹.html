@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+
+</head>
+<body>
+    <button id="btn">新建文件夹</button>
+    <div id="box"> 
+        <!-- <div class="floder">
+        <img src="./folder-b.png" alt="">
+        <input type="text">
+        <p>新建文件夹</p> 
+        </div>-->
+    </div>
+    <script src="../Q/node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        let ary = [
+        {
+            title:'新建文件夹',
+            id:0
+        },
+        {
+            title:'新建文件夹(1)',
+            id:1
+        }
+    ];
+
+        function render(ary){
+            $('#box').html('');
+            $.each(ary,(i,ele)=>{
+               let $folder=
+                    $( `
+                    <div class="floder">
+                    <img src="./folder-b.png" alt="">
+                    <input type="text">
+                    <p>${ele.title}</p>
+                    </div>
+                    `)
+                $folder.find('input').hide()
+                $('#box').append($folder)
+            })
+        }
+        render(ary)
+        $('#btn').click(function(){
+            let $folder=
+                    $( `
+                    <div class="floder">
+                    <img src="./folder-b.png" alt="">
+                    <input type="text"placeholder="请输入文件名" value="新建文件夹">
+                    </div>
+                    `)
+                // $folder.find('input').hide()
+            $('#box').append($folder);
+            let $txt=$folder.find('input');
+            $txt.select();//选中聚焦修改文件夹名 后面能拿到文件夹名val
+            $txt.blur(function(){//失焦的时候 
+                let val=$txt.val();
+                let bool=ary.map(ele=>ele.title).includes(val);//判断文件夹的名字有没有重复的
+                let num=1;
+                let nval='';
+                nval=val
+                while(bool){
+                    let s=val.replace(/\(\d\)$/,'')+'('+num++ +')';// 若有有重复的就累计加1
+                    bool=ary.map(ele=>ele.title).includes(s);//再次检测是否重名
+                    nval=s
+                }
+                ary.push({//将点击生成的数据加到ary中
+                    title:nval,
+                    id:+new Date
+                })
+                render(ary); //将新加的数据渲染进页面
+            })
+        })
+
+    </script>
+
+</body>
+</html>

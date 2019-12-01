@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+
+<body>
+    <!-- 大盒子 -->
+    <section>
+        <!-- 头部 -->
+        <header class="clearfix">
+            <main>
+                <a href="javascript:;">
+                    <img src="./img/微信图片_20191130165010.jpg" alt="">
+                    <span>文件管理</span>
+                </a>
+                <p class="jieshao">走自己的路，让别人说去吧</p>
+            </main>
+            <ul class="head_right">
+                <li class="right_0"><i>欢迎使用</i></li>
+                <li class="right_1">个人中心</li>
+                <li class="right_2">系统设置</li>
+            </ul>
+        </header>
+        <!-- 身子 -->
+        <section class="body">
+            <!-- 侧边栏 -->
+            <aside>
+                <ul class="nav_left">
+                    <li>
+                        <p><span>我的文档</span><img src="./img/br_jt.png" alt=""></p>
+                        <ul class="nav_tag">
+                            <li>文档1</li>
+                            <li>文档2</li>
+                            <li>文档3</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p><span>我的音乐</span><img src="./img/br_jt.png" alt="">
+                    </li>
+                    <li>
+                        <p><span>我的图片</span><img src="./img/br_jt.png" alt="">
+                    </li>
+                </ul>
+            </aside>
+            <!-- 内容部分 -->
+            <section class="neirong">
+                <!-- 表头 -->
+                <nav class="top clearfix">
+                    <ul class="top_ul">
+                        <li class="top_l0"><i></i>新建</li>
+                        <li class="top_l1"><i></i>移动</li>
+                        <li class="top_l2"><i></i>重命名</li>
+                        <li class="top_l3"><i></i>分享</li>
+                        <li class="top_l4"><i></i>下载</li>
+                        <li class="top_l5"><i></i>删除</li>
+                        <li class="top_l6"><i></i>刷新</li>
+                    </ul>
+                    <div class="top_dr">
+                        <div class="show_mode"></div>
+                        <div class="sort_mode">
+                            <i></i>
+                            <div class="cover"></div>
+                            <!-- <ul>
+                                <li>按时间排列</li>
+                                <li>按字母排列</li>
+                                <li>显示缩略图</li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- 主要内容 -->
+                <section class="fils">
+                    <div id="box">
+                        <!-- <div class="folder">
+                            <img src="./img/wendang.jpg">
+                            <input type="text"/>
+                            <p>新建文件夹</p>
+                        </div> -->
+                    </div>
+                </section>
+                <div id="peng"></div>
+            </section>
+        </section>
+    </section>
+    <script src="../Q/node_modules/jquery/dist/jquery.js"></script>
+    <script src="./bong.js"></script>
+    <script>
+        let ary = [
+            {
+                title: '新建文件夹',
+                id: 0
+            },
+            {
+                title: '新建文件夹(1)',
+                id: 1
+            }
+
+        ];
+
+        function render(arr) {
+            $('#box').html('')
+            $.each(arr, (i, item) => {
+                let $folder = $
+                    (`
+                        <div class="folder">
+                            <img src="./img/wendang.jpg">
+                            <input type="text"/>
+                            <p>${item.title}</p>
+                        </div>
+                    `)
+                $folder.find('input').hide();
+                $('#box').append($folder)
+            })
+
+        }
+        render(ary)
+        $('.top_l0').click(function () {
+            let $folder = $(`
+                <div class="folder">
+                    <img src="./img/folder-b.png">
+                    <input type="text" placeholder="请设置文件名"  value="新建文件夹"/>
+                </div>
+                `);
+            $('#box').append($folder);
+            let $txt = $folder.find('input');
+            $txt.select();//选中聚焦
+            $txt.blur(function () {
+                let val = $txt.val();
+                let bool = ary.map(item => item.title).includes(val);
+                let nval = '';
+                let num = 1;
+                navl = val;
+                while (bool) {
+                    // console.log(1)
+                    let s = val.replace(/\(\d\)$/, '') + '(' + num++ + ')';
+                    bool = ary.map(item => item.title).includes(s);
+                    nval = s;
+                }
+                ary.push(
+                    {
+                        title: nval,
+                        id: + new Date
+                    })
+                render(ary);
+            })
+
+        })
+
+
+
+        $('#box').mousedown(function (ev) {
+    
+            let { left, top } = $('#peng').offset();
+            let $X = $('#peng').get(0).disX = ev.pageX;
+            let $Y = $('#peng').get(0).disY = ev.pageY;
+            $('#peng').show()
+            $('#peng').css({
+                top: $Y + 'px',
+                left: $X + 'px'
+            })
+            $(document).mousemove(function (ev) {
+                $('#peng').css({
+                    left: Math.min(ev.pageX, $X) + 'px',
+                    top: Math.min(ev.pageY, $Y) + 'px'
+                })
+
+                $(".folder").each(function () {
+
+                    if (bong($('#peng')[0], $(this)[0])) {
+                        $(this).css('background', 'pink')
+                    } else {
+                        $(this).css('background', '')
+                    }
+                });
+
+                $('#peng').css({
+                    width: Math.abs(ev.pageX - $X) + 'px',
+                    height: Math.abs(ev.pageY - $Y) + 'px'
+                })
+            })
+            $(document).mouseup(function () {
+                $('#peng').hide();
+                $('#peng').css({
+                    width: 0,
+                    height: 0,
+                });
+                $(document).off('mousemove')
+                $(document).off('mouseup')
+            })
+            // ev.preventDefault();
+  
+        })
+      
+    </script>
+</body>
+
+</html>

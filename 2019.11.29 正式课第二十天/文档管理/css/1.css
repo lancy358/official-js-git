@@ -1,0 +1,253 @@
+body{
+  overflow: hidden;
+}
+.clearfix:after {
+  display: block;
+  height: 0;
+  content: "";
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+  font-size: 0;
+}
+.clearfix {
+  *zoom: 1;
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+header {
+  background-color: #c7c0c0;
+  padding: 10px;
+}
+header main {
+  color: #fff;
+  height: 60px;
+  line-height: 60px;
+  float: left;
+  margin-left: 5px;
+}
+header main a {
+  float: left;
+  font-size: 18px;
+  color: #b5e9f6;
+}
+header main img {
+  width: 60px;
+  height: 60px;
+  float: left;
+  margin: 0 20px;
+}
+header main span {
+  display: inline-block;
+  margin: 12px 25px 0 0;
+}
+header .jieshao {
+  height: 30px;
+  line-height: 30px;
+  float: left;
+  padding-left: 20px;
+  margin: 25px 0 0;
+  font-size: 25px;
+  font-family: "楷体";
+  border-left: 1px solid #b5e9f6;
+}
+header .head_right {
+  height: 60px;
+  float: right;
+  margin-right: 80px;
+}
+header .head_right li {
+  float: left;
+  padding: 25px;
+  color: #c4fafe;
+}
+header .head_right .right_0 {
+  font-size: 18px;
+  font-family: "楷体";
+}
+header .head_right .right_1 {
+  margin-right: 20px;
+  background: url('../img/ren.png') center no-repeat;
+  background-position-x: 0;
+  background-size: 20px 20px;
+}
+header .head_right .right_2 {
+  background: url('../img/set.jpg') center no-repeat;
+  background-position-x: 0;
+  background-size: 20px 20px;
+}
+.body aside {
+  width: 22%;
+  height: 600px;
+  background-color: #373e48;
+  float: left;
+}
+.body aside .nav_left li {
+  cursor: pointer;
+  background-color: #333a45;
+}
+.body aside .nav_left li p {
+  font-size: 20px;
+  color: #cad1d9;
+  padding: 10px 0 10px 86px;
+  height: 30px;
+  line-height: 30px;
+  background: url('../img/leftfile.png') center no-repeat;
+  background-position-x: 50px;
+  position: relative;
+}
+.body aside .nav_left li p img {
+  height: 12px;
+  position: absolute;
+  right: 40px;
+  top: 20px;
+}
+.body aside .nav_left .nav_tag {
+  font-size: 18px;
+  text-align: center;
+  color: #cad1d9;
+}
+.body aside .nav_left .nav_tag li {
+  background-color: #32323b;
+  height: 30px;
+  line-height: 30px;
+}
+.body .neirong {
+  float: left;
+  width: 78%;
+}
+.body .neirong .top {
+  width: 100%;
+  background: #ecf1f7;
+  border-bottom: 1px solid #d1d9db;
+}
+.body .neirong .top .top_ul {
+  float: left;
+  padding-left: 20px;
+}
+.body .neirong .top .top_ul li {
+  float: left;
+  padding: 0 16px 0 40px;
+  color: #6b7073;
+  height: 30px;
+  line-height: 32px;
+  border: 1px solid #d1d9db;
+  border-radius: 4px;
+  margin: 10px 10px 9px 0;
+  cursor: pointer;
+  background: #fff;
+  position: relative;
+}
+.body .neirong .top .top_ul li i {
+  position: absolute;
+  left: 12px;
+  top: 6px;
+  width: 20px;
+  height: 20px;
+}
+.body .neirong .top .top_ul .top_l0 i {
+  background: url(../img/create.png) no-repeat;
+}
+.body .neirong .top .top_ul .top_l1 i {
+  background: url(../img/move.png) no-repeat;
+}
+.body .neirong .top .top_ul .top_l2 i {
+  background: url(../img/ming.png) no-repeat;
+}
+.body .neirong .top .top_ul .top_l3 i {
+  background: url(../img/fenxiang.png) no-repeat;
+}
+.body .neirong .top .top_ul .top_l4 i {
+  background: url(../img/download.png) no-repeat;
+}
+.body .neirong .top .top_ul .top_l5 i {
+  background: url(../img/delete.png) no-repeat;
+}
+.body .neirong .top .top_ul .top_l6 i {
+  background: url(../img/refresh.png) no-repeat;
+}
+.body .neirong .top .top_ul li:hover {
+  color: #56acdf;
+  border-color: #56acdf;
+}
+.body .neirong .top .top_dr {
+  float: right;
+  padding-right: 20px;
+  width: 106px;
+  margin-top: 10px;
+  height: 38px;
+}
+.body .neirong .top .top_dr .show_mode {
+  float: left;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d1d9db;
+  background: #fff url(../img/ico_type.jpg) no-repeat 10px 10px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.body .neirong .top .top_dr .sort_mode {
+  position: relative;
+  float: left;
+  width: 56px;
+  height: 36px;
+  border: 1px solid #d1d9db;
+  border-radius: 4px;
+  background: #fff url(../img/sort_type.png) no-repeat 10px 10px;
+}
+.body .neirong .top .top_dr .sort_mode i {
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  background: url(../img/jt2.png) no-repeat;
+  right: 12px;
+  top: 17px;
+}
+.body .fils{
+  overflow-y: auto;
+  height: 500px;
+}
+.body .fils .folder {
+  float: left;
+  margin: 10px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  width: 100px;
+  text-align: center;
+}
+.body .fils .folder img {
+  width: 80px;
+}
+.body .fils .folder input {
+  width: 80px;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+}
+.body .fils .folder p {
+  width: 80px;
+  margin: 0 auto;
+  text-align: center;
+}
+#box{ overflow: hidden;
+      height:500px;
+     }
+#peng{
+  width: 0;
+  height: 0;
+  background: rgb(221, 216, 216,.3);
+  border: 1px solid gray;
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: none;
+}
