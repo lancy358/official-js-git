@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        发布订阅过程：订阅-发布 -解绑 订阅器（添加订阅事件和事件函数）
+        订阅池：它是一个对象，存储的是某一元素下的多个事件
+        事件池：一个事件下又有事件池，它是一个数组，里面存储多个事件函数
+        例如：{
+            click:[function(){},function(){}]
+        }
+
+     -->
+     <button id="btn">点击</button>
+     <script>
+         
+         //订阅
+         function addevent(obj,evName,fn){
+             obj.subscribe=obj.subscribe||{};//订阅池
+             obj.subscribe[evName]=obj.subscribe[evName]||[];//事件池
+             console.log(obj.subscribe)
+             obj.subscribe[evName].push(fn);//事件池中添加事件函数
+             
+         }
+         //发布
+         function publish(obj,evName){
+            if(!obj.subscribe||!obj.subscribe[evName]){//如果没有订阅池和事件池 返回null
+                return null;
+            }
+            obj.subscribe[evName].forEach(item =>item.call(obj));//循环事件池中的每个函数并依次调用 修改this指向为obj
+         }
+         //解除事件池中的事件函数
+         function removeEvent(){
+            if(!obj.subscribe || !obj.subscribe[evName]){
+                return null;
+            }
+            for(let i=0;i<obj.subscribe[evName].length;i++){//循环事件池 找到某个事件函数 并删除
+                if(obj.subscribe[evName][i]===fn){
+                    obj.subscribe[evName].splice(i,1);
+                    break;
+                }
+            }
+         }
+         //订阅器（存储器）
+         addevent(btn,'click',function(){
+             alert(1)
+         });
+         addevent(btn,'click',function(){
+             alert(2)
+         });
+         addevent(btn,'click',ff);
+         function ff(){
+             alert(3);
+             console.log(this);
+             removeEvent(btn,'click',ff)
+         }
+         addevent(btn,'mouseover',function(){
+             alert(4)
+         })
+         document.onclick=function(ev){
+            if(ev.target.tagName==='BUTTON'){
+                publish(btn,'click')
+            }//点击document 中的button元素 发布事件
+         }
+     </script>
+</body>
+</html>

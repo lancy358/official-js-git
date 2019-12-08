@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            height: 100px;
+            width: 100px;
+            background: chartreuse;
+            position: absolute;
+            left: 0;
+            top:0;
+            opacity: .1;
+}
+    </style>
+    
+</head>
+<body>
+    <div id="box"></div>
+    <script src="tween.js"></script>
+    <script>
+        /* 
+        易用性
+        默认值
+        可扩展
+        极致的性能
+        类似
+        animate({
+            width:200,
+            height:200
+        })
+        */
+        box.onclick=function(){
+            move({
+                attr:{
+                    width:'200px',
+                    height:'200px',
+                    top:'300px',
+                    left:500,
+                    opacity:1
+                },
+                el:box,
+                time:1000,
+                fx:'elasticOut',
+                cb:function(){
+                    move({
+                        el:box,
+                        attr:{
+                            top:'-100px'
+                        },
+                        fx:'elasticOut'
+
+                    })
+                }
+
+            })
+        }
+    </script>
+</body>
+</html>

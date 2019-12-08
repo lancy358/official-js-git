@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">点击</button>
+    <script>
+        class Subscribe{
+            constructor(){
+                this.subscribe={};//定义一个订阅池
+            }
+            addEvent(obj,evName,fn){//订阅
+               
+                this.subscribe[evName]=this.subscribe[evName]||[];
+                this.subscribe[evName].push(fn)
+            }
+            publish(obj,evName){//发布
+                if(!this.subscribe||!this.subscribe[evName]){
+                    return null
+                };
+                this.subscribe[evName].forEach(item=>item.call(obj))
+
+            }
+            removeEvent(obj,evName,fn){//解绑事件函数
+                if(!this.subscribe||!this.subscribe[evName]){
+                    return null
+                };
+                for(let i=0;i<this.subscribe[evName].length;i++){
+                    if(this.subscribe[evName][i]===fn){
+                        this.subscribe[evName].splice(i,1);
+                        break;
+                    }
+                }
+            }
+            
+        }
+        let a= new Subscribe;
+
+        function fn(){//订阅器
+            let aaa=10;
+            a.addEvent(btn,'click',function(){
+                alert('1');
+                function a(){
+                    alert('aa');
+                    aaa=20
+                };
+                a()
+            })
+            a.addEvent
+            (btn,'click',function(){
+                alert('2');
+                function a(){
+                    alert('ba');
+                    aaa=30;
+                }
+                a();
+                console.log(aaa)
+            })
+        }
+        fn();
+        btn.onclick=function(){
+            a.publish(btn,'click')
+        }
+    </script>
+</body>
+</html>

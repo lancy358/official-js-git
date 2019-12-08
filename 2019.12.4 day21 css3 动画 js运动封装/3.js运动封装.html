@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: aquamarine;
+            position: absolute;
+            top:0;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="./tween.js"></script>
+    <script>
+        let timer;
+        let count=500;
+        let duration=1000;
+        box.onclick=function(){
+            move(box,500,1000,'top')//元素 运动的目标点  时间 属性
+        }
+        //运动函数
+        function move(obj,c,d,attr){
+            let t=0;
+            let b=parseFloat(getComputedStyle(obj)[attr]);//元素本身的属性
+            c=c-b;//需要走的路程
+            timer=setInterval(()=>{
+                t+=16.7;
+                if(t>=d){
+                    t=d;
+                    clearInterval(timer);
+                }
+                obj.style[attr]=Tween.bounceOut(t,b,c,d)+'px';// 在当前时间走了多少步长
+            },16.7);
+
+        }
+    </script>
+</body>
+</html>

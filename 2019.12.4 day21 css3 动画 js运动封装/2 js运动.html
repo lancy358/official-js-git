@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: aquamarine;
+            position: absolute;
+            top:0;
+            left: 100px;
+        }
+    </style>
+
+</head>
+<body>
+    <!--
+        c:总长度
+        t：当前走了多少时间
+        d:总时间
+        b:初始的距离
+        当前走了多少时间（动）/总时间（固定的）*总长度（固定的）+初始的距离（固定的）
+        c*(t/d)+b
+        总时间=10秒；
+        总长度=500px；
+    -->
+    <div id="box"></div>
+    <script>
+        let timer;
+        let count=500;//总步长
+        let duration=1000;//总时间
+        box.onclick=function(){
+            let t1=+new Date;//初始时间
+            let b=parseFloat(getComputedStyle(box).left)//初始位置
+            count=count-b;//需要走的步长
+            timer=setInterval(()=>{
+                let t=new Date-t1;//走了多长时间
+                if(t>duration){
+                    t=duration;//如果走的时间大于设定的时间 让它等于设定时间
+                    clearInterval(timer);//停止运动
+                }
+                
+                box.style.left=b+t/duration*count+'px'
+                
+            },16.7)
+        }
+
+    </script>
+</body>
+</html>

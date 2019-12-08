@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+body{
+    overflow-y: hidden;
+}
+body header{
+    display: flex;
+    color:#fff;
+    height: 60px;
+    line-height: 60px;
+    background: gray;
+
+    /* justify-content: space-between; */
+}
+body header ul{
+    display: flex;
+    justify-content:center;
+    overflow: hidden;
+}
+body header ul li{
+    width: 100%;
+    /* height: 60px;
+    line-height: 60px; */
+    text-align: center;
+    color: rgb(197, 194, 194 );
+    padding-top: 0 20px;
+    cursor: pointer;
+}
+body header ul li:hover{
+    color: #fff;
+    background: rgb(142, 150, 125);
+}
+body header .h_left{
+    width: 180px;
+    height: 60px;
+    /* vertical-align: middle; */
+    margin-right:20px;
+}
+body header .h_left img{
+    width: 60px;
+    height: 60px;
+}
+body header .h_right{
+margin-left: auto;
+padding: 0 20px;
+cursor: pointer;
+}
+body header .h_right img{
+    width: 60px;
+    height: 60px;
+    /* float: right; */
+}
+nav{
+    height: 80px;
+    background: white;
+}
+nav ul{
+    display: flex;
+    justify-content: start;
+}
+nav ul li{
+    border: 1px solid gray;
+    margin: 10px 10px;
+    width:60px;
+    height:30px ;
+    line-height: 30px;
+    text-align: center;
+    font-size: 20px;
+}
+nav ul li:hover{
+    border: 1px solid blue;
+    color:blue;
+}
+.middle{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+aside{
+    flex-shrink: 0;
+    width:180px;
+    background-color: rgb(243, 231, 231);
+
+}
+#oUl{
+    font-size: 14px;
+    color: rgb(92, 88, 88);
+    width:100%
+}
+#oUl li{
+    position: relative;
+    overflow: hidden;
+}
+#oUl li div{
+    line-height: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+#oUl li div span{
+    display: block;
+    line-height: 30px;
+    padding-left:15px;
+    width: 20px;
+    height: 20px;
+    float: left;
+}
+#oUl li div span .add,.line{
+    cursor: pointer;
+}
+.content_box{
+    /* width:100px; */
+    font-size: 16px;
+    display: flex;
+    vertical-align: middle;
+    /* border: 1px solid black; */
+}

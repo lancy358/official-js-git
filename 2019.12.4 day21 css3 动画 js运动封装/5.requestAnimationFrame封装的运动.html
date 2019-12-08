@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            height: 100px;
+            width: 100px;
+            background: bisque;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="tween.js"></script>
+    <script>
+        /* 
+        定时器用运动容易掉帧 且性能差，所以使用requestAnimationFrame
+        */
+        box.onclick=function(){
+            move({
+                el:box,
+                attr:'width',
+                time:1000,
+                count:200,
+                cb:function(){
+                    console.log('运动完了')
+                }
+            });
+            move({
+                el:box,
+                attr:'height',
+                time:1000,
+                count:200,
+                cb:function(){}
+            })
+        }
+        function move({
+            el:obj=null,
+            attr='left',
+            time:d=500,
+            count:c=100,
+            cb=function(){}
+        }){
+            var t=0;
+            var b=parseFloat(getComputedStyle(obj)[attr]);
+            c=c-b;
+            (function start(){
+                obj.timer=requestAnimationFrame(function(){
+                    start();
+                    t+=16.7;
+                    if(t>d){
+                        t=d;
+                    }
+                    obj.style[attr]=c*t/d+b+'px';
+                    if(t===d){
+                        cancelAnimationFrame(obj.timer)
+                    }
+                })
+            })()
+        }
+    </script>
+    
+</body>
+</html>

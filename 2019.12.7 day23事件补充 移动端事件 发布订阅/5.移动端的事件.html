@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position:absolute;
+            left:0;
+            top:0;
+            opacity: .5;
+        }
+        #box2{
+            width: 100px;height: 100px;background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+    <script>
+        /* 
+        ontouchstart 手指按下
+        ontouchmove   手指移动
+        ontouchend 手指抬起
+        是一套事件，意思是在某个元素上按下之后在屏幕的任何位置移动或者抬起，都会触发
+        他们比鼠标事件更加快捷；大大提升用户体验
+        移动端的300s延迟：一般情况下，如果没有经过特殊处理，移动端浏览器在派发点击事件的时候，通常会出现300ms左右的延迟。也就是说，当我们点击页面的时候移动端浏览器并不是立即作出反应，而是会等上一小会儿才会出现点击的效果
+        问题由来：这当中最出名的，当属双击缩放(double tap to zoom)，这也是会有上述 300 毫秒延迟的主要原因。
+        解决方案：
+        方案一：禁用缩放
+        当HTML文档头部包含如下meta标签时：
+        <meta name="viewport" content="user-scalable=no">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1">
+        方案二：更改默认的视口宽度
+        <meta name="viewport" content="width=device-width">
+        点透：假如页面上有两个元素A和B。B元素在A元素之上。我们在B元素的touchstart事件上注册了一个回调函数，该回调函数的作用是隐藏B元素。我们发现，当我们点击B元素，B元素被隐藏了，随后，A元素触发了click事件。
+        这是因为在移动端浏览器，事件执行的顺序是touchstart > touchend > click。而click事件有300ms的延迟，当touchstart事件把B元素隐藏之后，隔了300ms，浏览器触发了click事件（如果执行了touchstart又触发了touchend在一个很短的时间内  并且不触发thouchmove  就认为用户做了点击事件），但是此时B元素不见了，所以该事件被派发到了A元素身上。如果A元素是一个链接，那此时页面就会意外地跳转。
+        解决方案：
+            1，回调函数的事件设置在300s之外
+            2，A元素不使用a或者input标签 
+            3，A元素是a或者input标签时阻止默认行为，在阻止冒泡（更实用）
+            4，用自定义tap事件代替touchstart事件当上层元素是tap事件，且tap后消失，下层元素是click事件。这个时候，tap上层元素的时候就会触发下层元素的click事件
+
+
+         */
+    </script>
+</body>
+</html>

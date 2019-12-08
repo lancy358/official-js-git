@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style> 
+    /* background : background-color(颜色) background-image（图片） background-repeat （平铺）background-attachment（是否随文本移动） background-position（北京图片位置）;  */
+    *{
+        margin:0;
+        padding: 0;
+    }
+    #box{
+        display: flex;
+        
+        justify-content: flex-start;
+        
+    }
+    #icon{
+        width: 32px;
+        height: 20px;
+        border: 1px solid #ccc;
+
+        cursor: pointer;
+        background-size:20px;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+
+    }
+    #txt{
+        width: 68px;
+        height: 20px;
+        border: 1px solid #ccc;
+        border-right:none;
+        outline: none;
+    }
+    .close{
+        background-image: url('./img/眼睛_闭.png');
+    }
+    .open{
+        background-image: url('./img/眼睛_开.png');
+    }
+    </style>
+</head>
+<body>
+    <section id="box" onmousedown="return false">
+        <input type="
+        password"
+        autofocus
+        maxlength="8"
+        id="txt">
+        <div id="icon" class="close"></div>
+    </section>
+    <script>
+        txt.mousedown=function(ev){
+            ev.cancellBubble=true;
+        }
+        icon.onclick=function(){
+            if(this.classList.toggle('open')){
+                txt.type='text';
+            }else{
+                txt.type='password'
+            }
+        }
+    </script>
+</body>
+
+</html>

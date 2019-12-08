@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../Q/node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- onload 静态资源加载完之后执行  弊端：当静态资源表较大，加载慢的时候 会影响用户体验（适合游戏开发）
+        ready事件：当DOM加载（骨架）完时触发 只管标签 不管静态资源（如src）；适合网页开发
+        原生的ready  DOMContentLoaded仅支持IE9以及更高的浏览器，基本上所有主流浏览器都支持（chrome，oprea，firefox）
+        document.addEventListener('DOMContentLoaded',function(){
+            do somthing
+        })
+        低版本浏览器通过onreadystatechange事件去监听 在IE下只要DOM加载成功后，又有一个doScroll('left')的方法，但是 如果没有成功是没有这个方法的，会报错，所以使用try去监听
+        function onready(){
+            try{
+                document.documentElement.doScroll('left');
+                onready(function(){
+                    fn()
+                })
+            }catch(e){
+                setTimeout(ready,500)
+            }
+        }
+        onready(function(){
+
+        })
+            
+         
+    -->
+    <script>
+
+    </script>
+</body>
+</html>
