@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style >
+        *{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            list-style: none;
+        }
+        #box{
+            position:relative;
+            width:1000px;
+            height:300px;
+            margin:30px auto;
+            /* border:1px solid gray; */
+            overflow: hidden;
+        }
+        #mask{
+            width:1000px;
+            height:300px;
+            position: absolute;
+            top:0;
+            left:0;
+            z-index: 2;
+            font-size: 0;
+            /* margin:10px auto; */
+        }
+        #prev,#next{
+            /* float: left; */
+            width:50%;
+            height:300px;
+            display:inline-block;
+            
+        }
+        #prev::after{
+            content:"";
+            width: 28px;
+            height: 45px;
+            background: url('img/pre.png') 0 0 no-repeat;
+            position:absolute;
+            left:0;
+            top:128px;
+            opacity: 0;
+            transition: 1s;
+            cursor:pointer;
+            /* border: 1px solid red; */
+
+        }
+        #next::after{
+            content:"";
+            width: 28px;
+            height: 45px;
+            background: url('img/pre.png') -50px 0 no-repeat;
+            position:absolute;
+            right:0;
+            top:128px;
+            opacity: 0;
+            transition: 1s;
+            cursor:pointer;
+            /* border: 1px solid red; */
+
+        }
+        #swiper{
+            position: absolute;
+            left:0;
+            width: 6000px;
+            height: 300px;
+        }
+        #swiper div{
+            width: 1000px;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: scale(1);
+        }
+        #swiper div:nth-of-type(1){
+            z-index: 3;
+        }
+        #swiper div:nth-of-type(2){
+            z-index: 2;
+        }
+        #swiper div:nth-of-type(3){
+            z-index: 1;
+        }
+        /* 鼠标点击切换 */
+        #focus1{
+            width: 120px;
+            height: 30px;
+            position: absolute;
+            display:flex ;
+            left:48%;
+            bottom:15px;
+            margin-left:-60px;
+            z-index: 10;
+        }
+        #focus1 li{
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            margin-right:5px;
+            border-radius: 50%;
+            background: white;
+        }
+        #focus1 li.select{
+            background: sienna;
+        }
+        #prev:hover::after,#next:hover::after{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="mask">
+            <div id="prev"></div>
+            <div id="next"></div>
+        </div>
+        <div id="swiper">
+
+        </div>
+        <ul id="focus1">
+            <li class="select"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <script src="./tween.js"></script>
+    <script>
+        fetch('banner.json').then(d=>d.json()).then(d=>{
+            let divs='';
+            divs=d.map(item=>`<div><img src="${item.img}" alt=""></div>`).join('');
+            swiper.innerHTML=divs;//将图片渲染进去
+            const len=d.length;
+            const lis=focus1.children;
+            let z=3;
+            const swiperChild=swiper.children;
+            let num=0,timer;
+            function change(){//点击切换图片
+                for(let i=0;i<len;i++){
+                    lis[i].className='';//大清洗
+                }
+                lis[num].className='select';//第num个加上颜色
+            }
+            next.onclick=left;
+            box.onmouseenter=function(){
+                clearInterval(timer);
+            }
+            box.onmouseleave=function(){
+                timer=setInterval(()=>{
+                    left();
+                },3000)
+            }
+            timer=setInterval(()=>{
+                left();
+            },3000)
+            function left(){
+                move({
+                    el:swiperChild[num],
+                    attr:{
+                        opacity:0
+                    }
+                });
+                num++;
+                num%=len;
+                change();
+                move({
+                    el:swiperChild[num],
+                    attr:{
+                        opacity:1
+                    }
+                })
+            }
+            prev.onclick=function(){
+                move({
+                    el:swiperChild[num],
+                    attr:{
+                        opacity:0
+                    }
+                });
+                num--;
+                if(num<0){
+                    num=len-1
+                }
+                change();
+                swiperChild[num].style.zIndex=z++;
+                move({
+                    el:swiperChild[num],
+                    attr:{
+                        opacity:1
+                    }
+                });
+            }
+
+
+        });
+    </script>
+</body>
+</html>

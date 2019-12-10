@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: red;
+    }
+</style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        let num=0;
+        document.addEventListener('top',function(){
+            num++;
+            console.log(num)
+        })
+        document.addEventListener('top',function(){
+            console.log(111)
+        })
+        let event=document.createEvent('Event');
+        enent.initEvent('top',true,true);
+        let startx=0,starty=0;
+        let movex=0,movey=0;
+        document.ontouchstart=function(ev){
+            startx=ev.changedTouches[0].pageX;
+            starty=ev.changedTouches[0].pageY;
+        }
+        document.ontouchmove=function(ev){
+            movex=ev.changedTouches[0].pageY;
+            movey=ev.changedTouches[0].pageX;
+        }
+        document.ontouchend=function(ev){
+            let endx=ev.changedTouches[0].pageX,
+            endy=ev.changedTouches[0].pageY;
+            if(startx===endx&&starty===endy){
+                console.log('点击')
+            }
+            if(endx-startx<0&&Math.abs(endy-starty)<Math.abs(endx-startx)){
+                console.log('左滑')
+            };
+            if(endy-starty<o&&Math.abs(endY - startY) < Math.abs(endX - startX)){
+                console.log('上滑')
+                document.dispatchEvent(event)
+            };
+
+
+        }
+    </script>
+</body>
+</html>

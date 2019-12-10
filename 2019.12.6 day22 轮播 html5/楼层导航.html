@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/font_1554347_2ox404ief5/iconfont.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #box{
+            width: 1100px;
+            margin: 0 auto;
+            background: rgb(225, 226, 224);
+        }
+        #nav{
+            width: 1100px;
+            height:60px;
+            display:flex ;
+            justify-content: space-between;
+        }
+        #navLeft{
+            display: flex;
+            justify-content:start;
+
+        }
+        #navLeft li{
+            margin-left:10px;
+            height:60px;
+            line-height: 60px;
+        }
+        #navRight{
+            display: flex;
+            justify-content:end;
+        }
+        #navRight div{
+            margin-right: 10px;
+            height:60px;
+            line-height: 60px;
+        }
+        #floors {
+            position: fixed;
+            top: 80px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        #floors li{
+            width: 100px;
+            height: 30px;
+            margin-top:5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <section id="box"> 
+        <nav id="nav">
+            <ul id="navLeft">
+                <li><a href=""><i id="icon" ></i></a></li>
+                <li><a href="" class="iconfont icon-yonghu">首页</a></li>
+                <li><a href="">直播</a></li>
+                <li><a href="">分类</a></li>
+                <li><a href="">视频</a></li>
+                <li><a href="">游戏</a></li>
+                <li><a href="">鱼吧</a></li>
+            </ul>
+            <div id="navRight">
+                <div id="search"><input type="text"><i></i></div>
+                <div><a href="">关注</a></div>
+                <div><a href="">开播</a></div>
+                <div><a href="">用户中心</a></div>
+                <div><a href=""><i id="user"></i></a></div>
+            </div>
+        </nav>
+        <section >
+            <ul id="floors">
+                <li><i></i>颜值</li>
+                <li><i></i>英雄联盟</li>
+                <li><i></i>绝地求生</li>
+                <li><i></i>穿越火线</li>
+                <li><i></i>王之荣耀</li>
+                <li><i></i>云顶模式</li>
+                <li><i></i>二次元</li>
+                <li><i></i>竞技游戏</li>
+                <li><i></i>网络游戏</li>
+                <li><i></i>网路游戏</li>
+                <li><i></i>客厅游戏</li>
+            </ul>
+            <div id="content">
+
+            </div>
+        </section>
+        <footer>
+
+        </footer>
+
+    </section>
+</body>
+</html>

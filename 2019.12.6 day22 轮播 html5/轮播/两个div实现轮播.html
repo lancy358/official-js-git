@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style >
+            *{
+                margin:0;
+                padding:0;
+            }
+            ul{
+                list-style: none;
+            }
+            #box{
+                position:relative;
+                width:1000px;
+                height:300px;
+                margin:30px auto;
+                /* border:1px solid gray; */
+                overflow: hidden;
+            }
+            #mask{
+                width:1000px;
+                height:300px;
+                position: absolute;
+                top:0;
+                left:0;
+                z-index: 2;
+                font-size: 0;
+                /* margin:10px auto; */
+            }
+            #prev,#next{
+                /* float: left; */
+                width:50%;
+                height:300px;
+                display:inline-block;
+                
+            }
+            #prev::after{
+                content:"";
+                width: 28px;
+                height: 45px;
+                background: url('img/pre.png') 0 0 no-repeat;
+                position:absolute;
+                left:0;
+                top:128px;
+                opacity: 0;
+                transition: 1s;
+                cursor:pointer;
+                /* border: 1px solid red; */
+    
+            }
+            #next::after{
+                content:"";
+                width: 28px;
+                height: 45px;
+                background: url('img/pre.png') -50px 0 no-repeat;
+                position:absolute;
+                right:0;
+                top:128px;
+                opacity: 0;
+                transition: 1s;
+                cursor:pointer;
+                /* border: 1px solid red; */
+    
+            }
+            #swiper{
+                position: absolute;
+                left:0;
+                width: 6000px;
+                height: 300px;
+                transition: .5s;
+            }
+            #swiper div{
+                width: 1000px;
+                height: 300px;
+                float: left;
+            }
+            #swiper div:nth-of-type(1){
+                z-index: 3;
+            }
+            #swiper div:nth-of-type(2){
+                z-index: 2;
+            }
+            #swiper div:nth-of-type(3){
+                z-index: 1;
+            }
+            /* 鼠标点击切换 */
+            #focus1{
+                width: 120px;
+                height: 30px;
+                position: absolute;
+                display:flex ;
+                left:48%;
+                bottom:15px;
+                margin-left:-60px;
+                z-index: 10;
+            }
+            #focus1 li{
+                justify-content: center;
+                width: 25px;
+                height: 25px;
+                margin-right:5px;
+                border-radius: 50%;
+                background: white;
+            }
+            #focus1 li.select{
+                background: sienna;
+            }
+            #prev:hover::after,#next:hover::after{
+                opacity: 1;
+            }
+        </style>
+</head>
+<body>
+    <div id="box">
+        <div id="mask">
+            <div id="prev"></div>
+            <div id="next"></div>
+        </div>
+        <div id="swiper">
+            <div><img src="" alt="" id="img1"></div>
+            <div><img src="" alt="" id="img2"></div>
+        </div>
+    </div>
+    <script>
+        fetch('../banner.json').then(d=>d.json()).then(d=>{
+            let num=0;
+            img1.src=d[num].img;
+            // img2.src=d[num+1].img;
+            const w=box.clientWidth;
+            next.onclick=function(){
+                num++;
+                // console.log(num)
+                img2.src=d[num%=3].img;//第二个img是第二张图片     
+                swiper.style.transition='.5s'; 
+                swiper.style.left=-w+'px'; //往左走 
+                setTimeout(()=>{
+                    img1.src=d[num].img;//第一个img瞬间变成第二张图片
+                    swiper.style.transition='none';
+                    swiper.style.left=0
+                },510);
+            }
+            prev.onclick=function(){
+                num--;
+                num%=3
+                if(num<0){
+                    num=d.length-1
+                }
+                img2.src=d[num%=3].img
+                swiper.style.transition='.5s'; 
+                swiper.style.left=-w+'px'
+                setTimeout(()=>{
+                    img1.src=d[num].img;
+                    swiper.style.transition='none';
+                    swiper.style.left=0
+                },510);
+            }
+        })
+    </script>
+</body>
+
+</html>
