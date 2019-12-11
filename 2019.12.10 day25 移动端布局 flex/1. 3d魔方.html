@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            width: 510px;
+            height: 510px;
+            margin:10% auto;
+            border: 1px solid #000;
+            perspective: 10000px;
+        }
+        /* #wrap:hover>#box{
+            transform:rotateY(360deg) rotateX(360deg) rotateZ(360deg);
+        } */
+        #box{
+            width: 510px;
+            height: 510px;
+            position: relative;
+            transform-origin: 255px 255px 255px;
+            transform-style: preserve-3d;
+            list-style: none;
+            /* transform: scale(0.5); */
+            transition: 3s;
+            animation:infinite;
+
+        }
+        li{
+            width: 510px;
+            height: 510px;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+        }
+        ul li:nth-child(1){
+            background: rgb(185, 12, 12);
+            transform:translateZ(510px) ;/* 把第一面到最外面*/
+
+        }
+        ul li:nth-child(2){
+            background: rgb(52, 126, 95);
+            /* top:-510px; */
+            transform:rotateX(-90deg);
+            transform-origin: bottom;
+        }
+        ul li:nth-child(3){
+            background: rgb(108, 26, 124);
+            /* left:510px; */
+            transform-origin: left;
+            transform:rotateY(-90deg);
+
+        }
+        ul li:nth-child(4){
+            background: rgb(255, 208, 0);
+            /* top: 510px; */
+            transform-origin: top;
+            transform:rotateX(90deg);
+
+        }
+        ul li:nth-child(5){
+            background: rgb(28, 13, 114);
+            /* left: -510px; */
+            transform:rotateY(90deg);
+            transform-origin: right;
+
+
+        }
+        ul li:nth-child(6){
+            background: rgb(129, 100, 207);
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul id="box">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+<script>
+    box.onmouseover=function(){
+        setInterval(()=>{
+            box.style.transform='rotateY(270deg) rotateX(270deg) rotateZ(270deg)'
+        })
+        clearInterval(()=>{
+            box.style.transform='rotateY(0deg) rotateX(0deg) rotateZ(0deg)'
+        })
+    }
+</script>
+</body>
+</html>

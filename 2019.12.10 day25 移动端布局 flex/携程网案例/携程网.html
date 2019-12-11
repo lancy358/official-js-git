@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #box{
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        #search{
+            display: flex;
+            /* justify-content: space-between; */
+        }
+        #search p{
+            border: 1px solid gray;
+            border-radius: 15px;
+            height: 28px;
+            flex: 1;
+            margin-left:15px;
+            margin-top:8px;
+            padding-left:15px;
+            text-align: center;
+            line-height: 28px;
+        }
+        #search p::before{
+            content: "";
+            background: url('') 0 0 no-repeat;
+
+        }
+        #search div{
+            width: 51px;
+            height: 44px;
+            border: 1px solid gray;
+            
+        }
+        .nav_box{
+            margin-top:240px;
+            border-radius:5px ;
+            
+        }
+        .nav_box li{
+            display: flex;
+            align-items: flex-start;
+            height: 117px;
+            width: 376px;
+            border: 1px solid #000;
+            margin: auto;
+            
+        }
+    </style>
+</head>
+<body>
+    <section id="box">
+        <div id="search">
+            <p>搜索目的地/酒店/景点/航班号</p>
+            <div>
+                <span>我的</span>
+            </div>
+        </div>
+        <nav id="nav">
+            <ul class="nav_box">
+                <li></li>
+                <li></li>
+                <li></li>
+               
+            </ul>
+        </nav>
+        <article>
+            <section></section>
+            <section></section>
+            <section></section>
+        </article>
+        <footer></footer>
+    </section>
+</body>
+</html>
