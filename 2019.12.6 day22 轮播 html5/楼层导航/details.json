@@ -1,0 +1,71 @@
+[
+    {
+        "id": 1,
+        "img": "./img/颜值.jpeg",
+        "title": "颜值",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 2,
+        "img": "./img/英雄联盟.jpg",
+        "title": "英雄联盟",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 3,
+        "img": "./img/绝地求生.jpg",
+        "title": "绝地求生",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 4,
+        "img": "./img/穿越火线.jpg",
+        "title": "穿越火线",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 5,
+        "img": "./img/王者荣耀.jpg",
+        "title": "王者荣耀",
+        "link": "https://www.douyu.com/"
+        
+    },
+    {
+        "id": 6,
+        "img": "./img/云顶模式.jpg",
+        "title": "云顶模式",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 7,
+        "img": "./img/二次元.jpeg",
+        "title": "二次元",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 8,
+        "img": "./img/竞技游戏.jpg",
+        "title": "竞技游戏",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 9,
+        "img": "./img/网络游戏.jpg",
+        "title": "网络游戏",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 10,
+        "img": "./img/客厅游戏.jpg",
+        "title": "客厅游戏",
+        "link": "https://www.douyu.com/"
+    },
+    {
+        "id": 11,
+        "img": "./img/手机游戏.jpg",
+        "title": "手机游戏",
+        "link": "https://www.douyu.com/"
+    }
+
+
+]

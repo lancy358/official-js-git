@@ -21,10 +21,21 @@
             width: 100%;
             max-width: 520px;
             margin: 0 auto;
+            /* background: orange; */
+           
+        }
+        #swiper{
+            background:cadetblue;
+            width: 100%;
+            height:247px;
+          
         }
         #search{
+            width: 100%;
             display: flex;
-            /* justify-content: space-between; */
+            justify-content: space-between;
+            position: fixed;
+            
         }
         #search p{
             border: 1px solid gray;
@@ -37,54 +48,203 @@
             text-align: center;
             line-height: 28px;
         }
-        #search p::before{
-            content: "";
-            background: url('') 0 0 no-repeat;
-
-        }
+       
         #search div{
             width: 51px;
             height: 44px;
-            border: 1px solid gray;
-            
+        }
+        
+        .search_box{
+            display: flex;
+        }
+        .search_box::before{
+            content: "";
+            display: block;
+            width:21px;
+            height: 21px;
+            background: url('./img/home-common-sprite2x@v7.15.png') 0 5px no-repeat;
+            background-size: cover;
+
+        }
+        #user span{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #user span::before{
+            content: "";
+            display: block;
+            width: 21px;
+            height: 21px;
+            background: url('./img/home-common-sprite2x@v7.15.png') 0 -77px no-repeat;
+            background-size: cover;
+        }
+        #content{
+            width: 90%;
+            margin: auto;
+            margin:-30px auto;
         }
         .nav_box{
-            margin-top:240px;
-            border-radius:5px ;
-            
-        }
-        .nav_box li{
+            height: 64px;
+            width: 100%;
+            background: whitesmoke;
+            border-radius: 5px;
             display: flex;
-            align-items: flex-start;
-            height: 117px;
-            width: 376px;
+            justify-content: space-around;
+        }
+        
+        .nav_box li {
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav_box li:nth-child(1)::before{
+            content: "";
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: url('./img/nav.png') 0 0 no-repeat;
+            background-size: cover;
+        }
+        .nav_box li:nth-child(2)::before{
+            content: "";
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: url('./img/nav.png') 0 -80px no-repeat;
+            background-size: cover;
+        }
+        .nav_box :nth-child(3)::before{
+            content: "";
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: url('./img/nav.png') 0 -80px no-repeat;
+            background-size: cover;
+        }
+        .nav_box :nth-child(4)::before{
+            content: "";
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: url('./img/nav.png') 0 -120px no-repeat;
+            background-size: cover;
+        }
+        .nav_box :nth-child(5)::before{
+            content: "";
+            display: block;
+            width: 40px;
+            height: 40px;
+            background: url('./img/nav.png') 0 -160px no-repeat;
+            background-size: cover;
+        }
+        #navs{
+            margin: 15px auto;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 198px;
+            border-radius: 8px;
             border: 1px solid #000;
-            margin: auto;
-            
+
+        }
+        #navs section{
+            width: 100%;
+            height: 64.8px;
+            display: flex;
+            /* border:1px solid gray; */
+            text-align: center;
+            line-height:64.8px ;
+            font-size: 16px;
+            /* justify-content: space-around; */
+        }
+        .navs_1 :nth-child(1){
+            flex:31%;
+            border: 1px solid gray;
+        }
+        .navs_1 :nth-child(2){
+            flex:23%;
+            border: 1px solid gray;
+        }
+        .navs_1 :nth-child(3){
+            flex:46%;
+            border: 1px solid gray;
+        }
+        .navs_2 :nth-child(1){
+            flex:31%;
+            border: 1px solid gray;
+        }
+        .navs_2 :nth-child(2){
+            flex:23%;
+            border: 1px solid gray;
+        }
+        .navs_2 :nth-child(3){
+            flex:23%;
+            border: 1px solid gray;
+        }
+        .navs_2 :nth-child(4){
+            flex:23%;
+            border: 1px solid gray;
+        }.navs_3 :nth-child(1){
+            flex:31%;
+            border: 1px solid gray;
+        }
+        .navs_3 :nth-child(2){
+            flex:23%;
+            border: 1px solid gray;
+        }
+        .navs_3 :nth-child(3){
+            flex:23%;
+            border: 1px solid gray;
+        }
+        .navs_3 :nth-child(4){
+            flex:23%;
+            border: 1px solid gray;
         }
     </style>
 </head>
 <body>
     <section id="box">
+           
         <div id="search">
-            <p>搜索目的地/酒店/景点/航班号</p>
-            <div>
+            <p class="search_box">搜索目的地/酒店/景点/航班号</p>
+            <div id="user">
                 <span>我的</span>
             </div>
         </div>
+        <div id="swiper"></div>
+        <section id="content">
         <nav id="nav">
             <ul class="nav_box">
-                <li></li>
-                <li></li>
-                <li></li>
-               
+                <!-- <img src="./img/nav.png" alt=""> -->
+                <li>攻略.景点</li>
+                <li>门票.玩乐</li>
+                <li>美食林</li>
+                <li>周边游</li>
+                <li>一日游</li>
             </ul>
         </nav>
-        <article>
-            <section></section>
-            <section></section>
-            <section></section>
+        <article id="navs">
+            <section class="navs_1">
+                <a href=""> 酒店</a>
+                <a href="">民宿.客栈</a>
+                <a href="">机票火车票</a>
+            </section>
+            <section class="navs_2">
+                <a href="">机票</a>
+                <a href="">火车票</a>
+                <a href="">门票</a>
+                <a href="">船票</a>
+            </section>
+            <section class="navs_3">
+                <a href="">旅游</a>
+                <a href="">高铁游</a>
+                <a href="">邮轮游</a>
+                <a href="">定制游</a>
+            </section>
         </article>
+    </section>
         <footer></footer>
     </section>
 </body>

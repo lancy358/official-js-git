@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box,#box2{
+            width: 100px;
+            height: 100px;
+            background: aquamarine;
+        }
+        #box2{
+            background: blueviolet;
+        }
+        @media screen and (max-width: 699px){
+            body{
+                background: chartreuse;
+            }
+            #box{
+                font-size: 50px;
+                float: initial;
+            }
+            #box2{
+                float: initial;
+            }
+        }
+        @media screen and (min-width: 700px){
+            body{
+                background: crimson;
+            }
+            #box{
+                font-size: 80px;
+                float: left;
+            }
+            #box2{
+                float: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="box">123456789</div>
+    <div id="box2">1234567890</div>
+</body>
+</html>

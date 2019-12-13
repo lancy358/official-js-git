@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../font_1554347_2ox404ief5/iconfont.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        #box{
+            width: 1100px;
+            margin: 0 auto;
+            background: rgb(249, 250, 249);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        #nav{
+            width: 1100px;
+            height:60px;
+            display:flex ;
+            justify-content: space-between;
+            position: fixed;
+            background: whitesmoke;
+        }
+        #navLeft{
+            display: flex;
+            justify-content:start;
+
+        }
+        #navLeft li{
+            margin-left:10px;
+            height:60px;
+            line-height: 60px;
+        }
+        #navLeft a:hover{
+            color:orange ;
+        }
+        #navRight{
+            display: flex;
+            justify-content:end;
+        }
+        #navRight div{
+            margin-right: 10px;
+            height:60px;
+            line-height: 60px;
+        }
+        #navRight a:hover{
+            color: orange;
+        }
+        #search p{
+            border: 1px solid gray;
+            height: 30px;
+            border-radius: 15px;
+            margin-top: 15px;
+            line-height: 30px;
+            color: gray;
+            font-size: 14px;
+            background:rgb(235, 232, 232);
+        }
+        #floors {
+            position: fixed;
+            top: 80px;
+            left:100px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            /* display: none; */
+        }
+        #floors li{
+            width: 100px;   
+            height: 30px;
+            margin-top:5px;
+            cursor: pointer;
+            text-align: center;
+            color: rgb(85, 83, 83);
+        }
+        #content{
+            margin-top:65px;
+            
+        }
+        a[class|="iconfont"]{
+            width: 40px;
+            height: 40px;
+            color:gray;
+        }
+        i[class|="icon"]{
+            width: 40px;
+            height: 40px;
+            color:gray;
+        }
+        .active{
+            color:indianred
+        }
+        /* #floors li:hover{
+            background: rgb(236, 228, 228);
+        } */
+        #details li img{
+            width: 1100px;
+            height: 722px;
+            /* display: none; */
+        }
+        .active{
+            background: rgb(236, 228, 228);
+        }
+    </style>
+</head>
+<body>
+<section id="box"> 
+        <nav id="nav">
+            <ul id="navLeft">
+                <li><a href="" class="iconfont icon-yonghu"></a></li>
+                <li><a href="" class="active">首页</a></li>
+                <li><a href="">直播</a></li>
+                <li><a href="">分类</a></li>
+                <li><a href="">视频</a></li>
+                <li><a href="">游戏</a></li>
+                <li><a href="">鱼吧</a></li>
+            </ul>
+            <div id="navRight">
+                <div id="search">
+                    <p><i class="icon iconfont icon-xingtaiduICON_sousuo--"></i>主播 房间 分类 视频</p>
+                </div>
+                <div><a href="" class=" iconfont icon-guanzhu ">关注</a></div>
+                <div><a href="" class="iconfont icon-zhibo">开播</a></div>
+                <div><a href="" class="iconfont icon-yonghu">用户中心</a></div>
+                <div><a href=""><i id="user"></i></a></div>
+            </div>
+        </nav>
+        <div id="content">
+                <ul id="details">
+                    <!-- <li><img src="./img/颜值.jpeg" alt="" title="颜值"></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li> -->
+                </ul>
+            </div>
+</section>
+        <section >
+            <ul id="floors">
+                <li><i class="icon iconfont icon-yanzhi"></i>颜值</li>
+                <li><i class="icon iconfont icon-yingxionglianmeng "></i>英雄联盟</li>
+                <li><i class="icon iconfont icon-juediqiusheng"></i>绝地求生</li>
+                <li><i class="icon iconfont icon-chuanyuehuoxian"></i>穿越火线</li>
+                <li><i class="icon iconfont icon-icon-test1"></i>王者荣耀</li>
+                <li><i class="icon iconfont icon-yun"></i>云顶模式</li>
+                <li><i class="icon iconfont icon-erciyuankong"></i>二次元</li>
+                <li><i class="icon iconfont icon-icon1 "></i>竞技游戏</li>
+                <li><i class="icon iconfont icon-wangluoyouxi"></i>网络游戏</li>
+                <li><i class="icon iconfont icon-icon-test "></i>客厅游戏</li>
+                <li><i class="icon iconfont icon-shouji"></i>手机游戏</li>
+            </ul>
+        </section>
+        
+        <footer>
+            
+        </footer>
+        <script src="绝对位置.js"></script>
+        <script>
+            fetch('./details.json').then(d=>d.json()).then(d=>{
+                console.log(d)
+                let str=''
+                d.forEach(item => {
+                    str=(`
+                    <li>${item.title}<img src="${item.img}" alt="" title=""/></li>
+                    `)
+                    
+                    details.innerHTML+=str
+                });
+                const li=document.querySelectorAll('#details li')
+                const fli=document.querySelectorAll('#floors li')
+                console.log(li)
+                let num=0
+                let a=new Tools;
+                fli.forEach((ele,i)=>{
+                    num++
+                    let {l,t}=a.position(li[num])
+                    console.log(l,t)
+                    ele.onclick=function(){
+                        if(ele[i]===num){
+                            li[num].s
+                        }
+                    }
+                })
+                
+            })
+            
+        </script>
+</body>
+</html>

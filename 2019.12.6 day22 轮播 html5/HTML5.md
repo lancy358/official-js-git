@@ -49,6 +49,15 @@
         <title>Document</title>
         <style> 
         /* background : background-color(颜色) background-image（图片） background-repeat （平铺）background-attachment（是否随文本移动） background-position（北京图片位置）;  */
+        复写 background: url('./0.jpg') no-repeat; 
+         如果写一个值是按照宽来走，高就自适应
+        background-size:50px auto;
+        一个是设置宽一个是设置高
+        background-size:200px 200px; 
+        填满整个区域
+        background-size:cover;
+        任意填满一边就够了
+        background-size:contain;
         *{
             margin:0;
             padding: 0;

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    好好学习，天天向上
+    <!-- 
+        pc
+        移动端：（只针对手机浏览器 单一的 两个不同的地址 在移动端的时候跳转另一个域名）
+            flex布局
+            rem布局：随着屏幕大小的改变页面也会跟着改变；em（按照父级或者自身字体的大小来设置单位）
+                rem(root em)根据html的字体大小来设置单位
+                root->根->html
+                手动设置媒体查询html字体样式
+
+            响应式布局：媒体查询（非常繁琐 一个项目要写若干个css去适配v
+            @media screen/all/print  and(max-width:980px(表示满足的设备 可以多个and条件)){//screen表示支持什么设备（all 所有 screen电脑屏幕手机端 pad print打印机 max-width 屏幕 <=多少宽度 时css样式，min-width>=大于等于最小值的时候css又是什么样式 样式多的时候可以使用link media的格式 
+
+            }
+            百分比布局，                                                                                     
+        视口 ：
+            布局视口 有滚动条 宽度以整个文档为主 只显示一部分 另一部分滑动滚动条可见                                                  document.documentElement.clientWidth
+            视觉视口  pc整个页面显示在移动端浏览器上 会缩小页面尺寸 window.innerWidth
+            理想视口（主流) 一切显示根据移动端设备尺寸走 window.screen.width 依赖于<meta name="viewport" content="width=device-width（设备宽度）, initial-scale=1.0（初始比例）,maximum-scale=1,(最大的缩放比例，minimun-scale=1(最小的缩放比例）,user-scalable=0(不允许用户缩放比例）">
+        物理像素：720px*980px 一个屏幕有多少个像素点
+        逻辑像素（css像素）：一个css像素需要4个物理像素 在移动端设备上 css像素就是 360px*490px
+            pc上逻辑像素与物理像素是相等的 所以布局的时候量的是多少就是多少
+            web App js开发的
+            js写前端调取不到摄像头 
+            hybrid App 开发 （解决兼容问题 一套代码兼容多种移动端系统）
+            cordova 混合开发同hybrid 
+            JSbridge 微信小程序
+            flutter：
+            
+     -->
+</body>
+</html>
