@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>穿墙效果</title>
+  <style>
+    .contentBox {
+      width: 300px;
+      overflow: hidden;
+      position: relative;
+      float: left;
+      margin: 10px;
+    }
+
+    .contentBox img {
+      width: 100%;
+      display: block;
+    }
+
+    .maskBox {
+      position: absolute;
+      width: 100%;
+      height: 50px;
+      bottom: 0;
+      overflow: hidden;
+      display: none;
+    }
+
+    .mask {
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, .5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div class="contentBox">
+      <img src="https://c-ssl.duitang.com/uploads/item/201307/25/20130725221337_ifkzs.thumb.700_0.jpeg" alt="">
+      <div class="maskBox">
+        <div class="mask"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 事件委托
+    document.onmouseover = function (e) {
+      if (e.target.nodeName.toUpperCase() === 'IMG') {
+        // 进入这个条件，e.target 只能是 img
+
+        // 获取 contentBox
+        let cBox = e.target.parentNode;
+
+        // 获取 mask
+        let mask = cBox.getElementsByClassName('mask')[0];
+
+        // 获取 contentBox 在页面中的位置
+        cBox.pLeft = cBox.offsetLeft;
+        cBox.pTop = cBox.offsetTop;
+        cBox.pRight = cBox.offsetLeft + cBox.offsetWidth;
+        cBox.pBottom = cBox.offsetTop + cBox.offsetHeight;
+
+        cBox.onmouseenter = moveIn;
+        cBox.onmouseleave = moveOut;
+
+        function moveIn(e) {
+          let left = Math.abs(e.pageX - cBox.pLeft);
+          let top = Math.abs(e.pageY - cBox.pTop);
+          let right = Math.abs(e.pageX - cBox.pRight);
+          let bottom = Math.abs(e.pageY - cBox.pBottom);
+
+          // 取鼠标对于cBox四个方向的最小值
+          let min = Math.min(left, top, right, bottom);
+
+          switch (min) {
+            case left:
+              maskIn('left');
+              break;
+            case top:
+              maskIn('top');
+              break;
+            case right:
+              maskIn('right');
+              break;
+            case bottom:
+              maskIn('bottom');
+              break;
+          }
+
+        }
+
+        function moveOut(e) {
+          let left = Math.abs(e.pageX - cBox.pLeft);
+          let top = Math.abs(e.pageY - cBox.pTop);
+          let right = Math.abs(e.pageX - cBox.pRight);
+          let bottom = Math.abs(e.pageY - cBox.pBottom);
+
+          // 取鼠标对于cBox四个方向的最小值
+          let min = Math.min(left, top, right, bottom);
+
+          switch (min) {
+            case left:
+              maskOut('left');
+              break;
+            case top:
+              maskOut('top');
+              break;
+            case right:
+              maskOut('right');
+              break;
+            case bottom:
+              maskOut('bottom');
+              break;
+          }
+
+        }
+
+        function maskIn(direction) {
+          console.log(direction);
+          let step, attr, max;
+          if (direction === 'left' || direction === 'top') {
+            // 如果鼠标划入的方向是上或者左，那么mask的margin值是负数，所以我们要增加它的margin值，所以步数是正值
+            step = 15;
+          } else {
+            step = -15
+          }
+          if (direction === 'left' || direction === 'right') {
+            // 如果方向是左或者右，说明我们要进行的是横向动画，我们要操控 marginLeft，并且一开始 mask 的 margin 值是正或者负的 mask.offsetWidth
+            attr = 'marginLeft'; // 要操控哪个方向的 margin 值
+            max = 'offsetWidth';
+          } else {
+            attr = 'marginTop';
+            max = 'offsetHeight';
+          }
+
+          // 让蒙层显示出来
+          mask.parentNode.style.display = 'block';
+
+          // 先给mask的margin设置好一开始的位置
+          step > 0 ? mask.style[attr] = -mask[max] + 'px' : mask.style[attr] = mask[max] + 'px';
+          clearInterval(mask.timer)
+          mask.timer = setInterval(() => {
+            // 我们下一步要给mask设置的margin值
+            let value = parseFloat(mask.style[attr]) + step;
+
+            if (step > 0) {
+              // 如果 step 大于0，就是要增加 margin 值，所以不能让他超过0
+              if (value >= 0) {
+                mask.style.marginTop = mask.style.marginLeft = 0;
+                clearInterval(mask.timer)
+              } else {
+                // 设置这个我们计算好的值
+                mask.style[attr] = value + 'px';
+              }
+            } else {
+              if (value <= 0) {
+                mask.style.marginTop = mask.style.marginLeft = 0;
+                clearInterval(mask.timer)
+              } else {
+                mask.style[attr] = value + 'px';
+              }
+            }
+          }, 10);
+
+        }
+
+        function maskOut (direction) {
+          mask.style.marginLeft = mask.style.marginTop = 0;
+          clearInterval(mask.timer);
+
+          let step, attr, max;
+          if (direction === 'left' || direction === 'top') {
+            // 如果鼠标划出的方向是上或者左，那么mask的margin值是 0，所以我们要减少它的margin值，所以步数是负值
+            step = -15;
+          } else {
+            step = 15
+          }
+          if (direction === 'left' || direction === 'right') {
+            // 如果方向是左或者右，说明我们要进行的是横向动画，我们要操控 marginLeft，并且一开始 mask 的 margin 值是正或者负的 mask.offsetWidth
+            attr = 'marginLeft'; // 要操控哪个方向的 margin 值
+            max = 'offsetWidth';
+          } else {
+            attr = 'marginTop';
+            max = 'offsetHeight';
+          }
+          mask.timer = setInterval(() => {
+            // 我们下一步要给mask设置的margin值
+            let value = parseFloat(mask.style[attr]) + step;
+
+            if (step > 0) {
+              // 如果 step 大于0，就是要增加 margin 值，所以不能让他超过0
+              if (value <= -mask[max]) {
+                clearInterval(mask.timer);
+                mask.parentNode.style.display = 'none';
+              } else {
+                // 设置这个我们计算好的值
+                mask.style[attr] = value + 'px';
+              }
+            } else {
+              if (value >= mask[max]) {
+                clearInterval(mask.timer);
+                mask.parentNode.style.display = 'none';
+              } else {
+                mask.style[attr] = value + 'px';
+              }
+            }
+          }, 10);
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
