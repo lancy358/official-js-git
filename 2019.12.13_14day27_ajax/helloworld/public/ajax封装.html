@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册用户名：<input type="text" name="" id="user"><span id="s"></span><br>
+    注册的密码：<input type="password" id="pw"/><br>
+    <button id="btn">按钮</button>
+    <script>
+        user.onblur=function(){
+            console.log(111)
+            ajax('/get',{
+                error:function(status){
+                    console.log(status)
+                },
+                success:function(d){
+                    console.log(d,'成功')
+                }
+            },{
+                method:'get',
+                body:'user='+this.value,
+                headers:{
+                    'content-type':'application/x-www-form-urlencoded'
+                }
+            });
+        }
+        function ajax(url,cb,opt){
+            console.log(222)
+            var myopt=opt&&{
+                method:opt.method||'get',
+                body:opt.body||'',
+                headers:opt.headers||{}
+            }
+            var len =arguments.length;
+            var xhr=new XMLHttpRequest;
+            if(len===2){//传两个实参 默认get方式
+                xhr.open('get',url,true);
+                xhr.send();
+                xhr.onload=function(){
+                    cb && cb(JSON.parse(xhr.responseText))
+                }
+            }else if(len===3){//传三个实参
+                console.log(333)
+                if(/^get$/i.test(myopt.method)){//get方式请求
+                    xhr.open('get',url+'?'+myopt.body+'&myrandom='+Date.now(),true);
+                    
+                    xhr.onreadystatechange=function(){//用onreadystatechange是为了兼容所有版本 并且可以监听所有的请求的状态
+                        console.log(444)
+                        if(xhr.readyState===4){//限制只显示一次
+                             /* 
+                            readystate有5个状态值
+                            0 ：请求未初始化 (监听不到)
+                            1 ：服务器已建立连接
+                            2 ：请求已接收
+                            3  ：请求处理中
+                            4 ：请求已完成，并且已经相应就绪
+
+                             */
+                            if(/(20[0-7])|(30[14])/.test(xhr.status)){//xhr.status 状态码：表示成功
+                                
+                                cb.success(eval('('+xhr.responseText+')'))
+
+                            }else{
+                                cb.error&&cb.error(xhr.status);//失败的状态码 400 以上的状态码表示失败
+                                console.log('失败')
+                            }
+                        };
+                    }
+                    xhr.send();
+                }else if(/^post$/i.test(myopt.method)){
+                    xhr.open('post',url,true);
+                    for(var attr in myopt.headers){
+                        if(myopt.headers.hasOwnproperty(attr)){
+                            xhr.setRequestHeader(attr,myopt.headers[attr])//'content-type','application/x-www-form-urlencoded'
+                        }
+                    }
+                    xhr.send(myopt.body);
+                    xhr.onload=function(){
+                        cb&&cb(JSON.parse(xhr.responseText))
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

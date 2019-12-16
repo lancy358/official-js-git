@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="txt">
+    <button id="btn">变</button>
+    <script>
+    btn.onclick=function(){
+        let val=txt.value;
+        // if(/href|src|style|location/.test(val)){
+        //     alert('非法操作')
+        // }else{
+            console.log(eval(`(${txt.value})`))
+        // }
+    }
+    // let fn1=new Function('a,b','ruturn a+b')(1,2)
+    console.log(new Function('a,b','return a+b')(1,2))
+    console.log(new Function('','return'+'{name:"hehe"}')())
+    let ary='[1,2,3,4]'
+    let json='{"name":"hh"}'
+    console.log(eval('('+json+')'))
+    console.log(eval(ary))
+    </script>
+</body>
+</html>

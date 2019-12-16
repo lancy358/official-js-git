@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名：<input type="text" id="user"><p></p><br>
+    注册的密码：<input type="password" id="pw"><br>
+    <button id="btn">提交</button>
+    <script>
+        let re=/^[a-zA-Z]\w{5,7}$/
+        user.onblur=function(){
+            // console.log(XMLHttpRequest)构造函数
+            /* 
+            发起ajax请求（打电话模式）
+            1.创建一个电话
+            2.打开拨号盘
+            3.按绿色键拨打
+            4.等待
+            5.通话
+
+            */
+           let val=this.value.trim();
+           if(val&&re.test(val)){
+                let xhr=new XMLHttpRequest//创建XMLHttpRequest对象
+                xhr.open('get','/get?user='+this.value,true)//填写请求方式 请求地址  是否异步
+                xhr.send()//发送请求
+                xhr.onload=function(){//监听数据响应
+                    console.log(JSON.parse(xhr.responseText))//接收到数据
+                    let d=JSON.parse(xhr.responseText);
+                    if(d.code===0){
+                        user.style.border='1px solid red'
+                    }else if(d.code===1){
+                        user.style.border='1px solid green'
+                    }
+                }
+            }else{
+                user.style.border='1px solid red'
+                p.innerText='请按格式输入 '
+
+            }
+
+        }
+    </script>
+</body>
+</html>

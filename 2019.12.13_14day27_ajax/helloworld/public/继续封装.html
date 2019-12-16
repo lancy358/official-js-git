@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+
+    <ul id="ul">
+
+    </ul>
+    <script>
+    user.onblur=function(){
+        ajax('/sleep?name='+this.value,{
+            success(d){
+                console.log(d)
+            }
+        },{
+            async:false,
+            //body:'name='+this.value
+        })
+        console.log('此处执行10000行')
+    }
+    function ajax(url,cb,opt){
+        var myopt=opt&& {
+            methed:opt.methed||'get',
+            body:opt.body||'',
+            headers:opt.headers||{},
+            dataType:opt.dataType||'json',
+            timeout:opt.timeout||10000,//设置超时时间 默认10000
+            ontimeout:opt.ontimeout||function(){}, //设定超时函数
+            async:(opt.async===undefined)?true:opt.async//没有async的时候走true 
+        };
+        var len =arguments.length;
+        var xhr=new XMLHttpRequest;
+        if(opt.async===true){//异步是时候
+            xhr.timeout=myopt.timeout;//设置超时时间
+            xhr.ontimeout=myopt.ontimeout//设置监听超时
+        }
+        function ready(){
+            if(myopt.async===true){
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState===4){
+                        if(/(20[0-7])|(30[14])/.test(xhr.status)){
+                            if(myopt.dataType==='json'){
+                                cb.success&&cb.success(
+                                    eval('('+xhr.responseText+')'))
+                            }else if(myopt.dataType==='xml'){
+                                 cb.success&&cb.success(xhr.responseXML)       
+                            }        
+                        }else{
+                            cb.error&&cb.error(xhr.status)
+                        }
+                    }
+                }
+            }else{
+                if(myopt.async===false){
+                    if(/(20[0-7])|(30[14])/.test(xhr.status)){
+                            if(myopt.dataType==='json'){
+                                cb.success&&cb.success(
+                                    eval('('+xhr.responseText+')'))
+                            }else if(myopt.dataType==='xml'){
+                                 cb.success&&cb.success(xhr.responseXML)       
+                            }        
+                        }else{
+                            cb.error &&  cb.error(xhr.status);
+                        }
+                }
+            }
+        }
+        if(len===2){
+            xhr.open('get',url,true);
+            ready();
+            xhr.send();
+        }else if(len===3){
+            if(/^get$/i.test(myopt.methed)){
+                url=myopt.body?url+'?'+myopt.body:url//看有没有myopt.body 如果有就url?+body 没有就直接url
+                xhr.open('get',url+'&myrandom='+Date.now(),myopt.async);
+                xhr.send();
+                ready();
+            }else if(/^post$/i.test(myopt.methed)){
+                xhr.open('post',url,myopt.async);
+                for(var attr in myopt.headers){
+                    if(myopt.headers.hasOwnProperty(attr)){
+                        xhr.setRequestHeader(attr,myopt.headers[attr]);
+                    }
+                }
+                xhr.send(myopt.body);
+                ready()
+            }
+        }
+
+    }
+    </script>
+</body>
+</html>

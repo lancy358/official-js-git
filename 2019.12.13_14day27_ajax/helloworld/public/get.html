@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    注册的用户名：<input type="text" id="user">
+    注册的密码：<input type="password" id="pw">
+    <button id="btn">提交</button>
+
+    <script >
+        /* 
+        code=0重复
+        code=1 可以注册
+         */
+        // fetch('/get?user='+user.value+'&pw'+pw.value+'').then(d=>d.json).then(d=>{})
+        user.onblur=function(){
+            // console.log(1111)
+            fetch('/get?user='+user.value).then(d=>d.json()).then(d=>{
+                if(d.code===0){
+                    user.style.border='1px solid red'
+                }else if(d.code===1){
+                    user.style.border='1px solid green'
+                }
+            })
+        }
+    </script>
+</body>
+</html>
