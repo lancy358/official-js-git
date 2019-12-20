@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width:300px;
+            border:1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 60px auto;
+
+        }
+        #ul{
+            width: 170px;
+            border:1px solid #ccc;
+            border-top: none;
+            border-bottom: none;
+        }
+        #ul li{
+            height: 20px;
+            line-height: 20px;
+            border-bottom: 1px solid #ccc;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h2>搜索</h2>
+        <input type="text" id="search" autocomplete="off" autofocus>
+        <ul id="ul"></ul>
+    </div>
+    <script>
+        function fn(data){
+            // console.log(data)
+            const {g}=data;
+            let html='';
+            if(!g){//输入的数字没有返回查询信息
+                ul.innerHTML='';
+                return;
+            }
+            g.forEach(({q}) => { //将查询的信息显示在li中
+                html+=`<li>${q}</li>`;
+            });
+            ul.innerHTML=html 
+            ul.onclick=function(ev){//点击li还能跳转到信息相关的链接
+                if(ev.target.tagName==='LI'){
+                    window.open('https://www.baidu.com/s?ie=UTF-8&wd='+ev.target.innerText,'_blank')
+                }
+            }
+        }
+        search.onkeyup=function(){
+            let o=document.createElement('script');
+            o.src='https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd='+ this.value +'&cb=fn'
+            head.append(o);
+            o.remove()
+        }
+    </script>
+</body>
+</html>

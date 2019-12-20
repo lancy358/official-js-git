@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <button id="hash">改hash</button>
+    <button id="search">改search</button>
+    <script>
+        let i=0;
+        hash.onclick=function(){//不会刷新页面
+            window.location.hash='a=y'+i++;
+            console.log(window.location.hash)
+        }
+        window.onhashchange=function(){//改变hash值会触发onhashchange事件
+            console.log(111)
+        }
+        search.onclick=function(){//会刷新页面
+            window.location.search='b=z'+i++;
+            console.log(window.location.search)
+        }
+    </script> -->
+    <!-- 
+        选项卡
+     -->
+     <button>111</button>
+     <button>222</button>
+     <button>333</button>
+     <p id="p">第一张图片</p>
+     <input type="button" value="后退" id="btn"> 
+     <script>
+         let ary=['第一张图片','第二张图片','第三张图片']
+         const btns=document.querySelectorAll('button')
+        console.log(btns)
+        let index=0;
+        if(window.location.hash){
+            window.location.hash='page/'+index
+            p.innerHTML=ary[index]
+        }else{
+            window.location.hash='page/0'
+        }
+        btns.forEach((ele,i)=>{
+                ele.onclick=function(){
+                    p.innerHTML=ary[i]
+                    window.location.hash='page/'+i
+                }
+            })
+        window.onhashchange=function(){
+            index=window.location.hash.match(/page\/(\d)/)[1];
+            p.innerHTML=ary[index]
+        }    
+        btn.onclick=function(){
+            index--;
+            if(index<0){
+                index=0
+            }
+            window.location.hash='page/'+index
+        }
+     </script>
+</body>
+</html>

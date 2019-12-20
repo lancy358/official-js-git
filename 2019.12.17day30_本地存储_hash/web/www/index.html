@@ -1,0 +1,91 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="nArea">
+    <!--留言-->
+    <div class="takeComment">
+        <textarea name="textarea" class="takeTextField" id="text"></textarea>
+        <div class="takeSbmComment">
+            <input type="button" id="submit" class="inputs" value=""/>
+            <span>(可按 Enter 回复)</span>
+        </div>
+    </div>
+    <!--已留-->
+    <div class="commentOn">
+        <div class="messList" id="div1" style="height:502px">
+            <!-- <div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div> -->
+        </div>
+        <div class="page" id="page">
+            <!-- <a href="#" class="active">1</a>
+            <a href="#" >2</a> -->
+        </div>
+    </div>
+</div>
+<script>
+    //保证刷新之后数据直接渲染到页面
+    fetch('/api/weibo?act=get&page=1').then(d=>d.json()).then(d=>{
+        // console.log(d)
+        d.reverse();
+        d.forEach(item => {
+            render(item)
+        });
+    });
+    //增加数据
+    submit.onclick=function(){
+        let {value}=text;
+        fetch('/api/weibo?act=add&content='+value).then(d=>d.json()).then(d=>{
+            if(d.code===0){
+                d.content=value;
+                render(d);
+                text.value='';
+            }
+        })
+    }
+    function todou(n){
+        
+        return n<10?'0'+n:''+n
+    }
+    function render(d){
+        let o=new Date(d.time)
+        let year=o.getFullYear();
+        let mon=o.getMonth();
+        let date=o.getDate();
+        let h=o.getHours();
+        let m=o.getMinutes();
+        let s=o.getSeconds();
+        div1.innerHTML=`
+            <div class="reply">
+                <p class="replyContent">${d.content}</p>
+                <p class="operation">
+                    <span class="replyTime">${year}-${todou(mon)}-${todou(date)} ${todou(h)}:${todou(m)}:${todou(s)}</span>
+                    <span class="handle">
+                        <a href="javascript:;" id="top">0</a>
+                        <a href="javascript:;" id="down_icon">0</a>
+                        <a href="javascript:;" id="cut">删除</a>
+                    </span>
+                </p>
+            </div>
+        `+div1.innerHTML
+    }
+
+    top.onclick=function(){
+        
+    }
+</script>
+</body>
+</html>
