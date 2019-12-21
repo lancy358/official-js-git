@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    function* fn(){
+        console.log('获取之前');
+        let res=yield request('/sleep?user=lilei');
+        console.log('拿到数据'+res)
+        console.log('获取之后')
+    }
+    let f=fn();
+    document.onclick=function(){
+        f.next();//输出获取之前
+    }
+    function request(url){
+        let xhr=new XMLHttpRequest;
+        xhr.open('get',url);
+        xhr.send();
+        xhr.onload=function(){
+            f.next(xhr.responseText)
+        }
+    }
+</script>
+</body>
+</html>
