@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        
+        let str="https://www.baidu.com/s?wd=nodejs%E6%95%99%E7%A8%8B%E5%93%AA%E4%B8%AA%E5%A5%BD&rsf=1000008&rsp=1&f=1&oq=node%E6%95%99%E7%A8%8B&tn=baiduhome_pg&ie=utf-8&rsv_idx=2&rsv_pq=b2b1a778002ffd4b&rsv_t=dadeftVAxorIjDYFY%2FDDpaJ6Sr1ma3idPn4TNShvwrFLFZuOLBeoEfWC16WFdeSyuSrg&rqlang=cn&rs_src=0"
+        let str1=str.split('?')[1]
+        console.log(str1)
+        let re=/([a-z]\w{0,10})=([\w=%-]+)&?/g 
+        let re1=/([^=]+)=([^&]+)&?/g 
+        let obj={};
+        str1.replace(re1,function($0,$1,$2,$3){
+            // console.log($1,$2)
+            obj[$1]=$2
+        })
+        console.log(obj)
+        </script>
+</body>
+</html>
