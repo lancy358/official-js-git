@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #adddir,#rename_box{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+     <button id="btn">新建文件夹</button><br>
+     <input type="text" id="adddir">
+     <button id="rebtn">重命名</button>
+     <div id="rename_box">
+         <input type="text" name="" id="oldname">
+         <input type="text" name="" id="newname">
+         <button id="rename">确定替换</button>
+     </div>
+     <script>
+         btn.onclick=async function(){
+             adddir.style.display='block';
+
+             let data=  await fetch('/add?hh').then(d=>d.json());
+             if(data.code===0){
+                 alert('文件夹创建成功')
+             }
+         }
+     </script>
+</body>
+</html>
