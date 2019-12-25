@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin:0;
+        }
+        #box{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+            height: 300px;
+            margin: 150px auto;
+        }
+        .box2{
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        #box_register{
+            display: none;
+        }
+        #change{
+            position: absolute;
+             right: 20px;
+             top: 5px;
+             
+        }
+        #diag{
+            width: 100px;
+            height: 30px;
+            background-color: gray;
+            color: black;
+            text-align: center;
+            line-height: 30px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0 auto;
+            top: -30px;
+            transition: -5s;
+        }
+        .active{
+            background: yellow;
+        }
+       
+    </style>
+</head>
+<body>
+    <p id="p"></p>
+    <div id="diag"></div>
+    <div id="change">
+    <button id="b1" class=" bb">登录</button>
+    <button id="b2" class="bb">注册</button>
+    </div>
+    <div id="box">
+        <div id="box_login" class="box2 ">
+            <div class="box1"><span>登录用户名：</span><input type="text" autocomplete="off"  placeholder="请输入用户名"  id="userd"></div>
+            <div class="box1"><span>登录密&&码：</span><input type="password"   id="pwd"></div>
+        </div>
+        <div id="box_register"  class="box2 ">
+            <div class="box1"><span>注册用户名：</span><input type="text" autocomplete="off" placeholder="请输入用户名"  id="user"></div>
+            <div class="box1"><span>注册密&&码：</span><input type="password"   id="pw"></div>
+        </div>
+        
+    
+        <div id="btn_box">
+            <button id="register">注册</button>
+            <button id="login">登录</button>
+        </div>
+    </div>
+    <script src="axios.js"></script>
+    <script>
+        function diag(val){
+            diag.innerText=val;
+            diag.style,top=0;
+            setTimeout(()=>{
+                diag.style.top='-30px'
+            },1000)
+        }
+        const bbs=document.querySelectorAll('.bb');
+        const box2s=document.querySelectorAll('.box2')
+        let index=0;
+        bbs.forEach((ele,i)=>{
+            ele.onclick=function(){
+                bbs[index].classList.remove('active');//之前的清除样式
+                this.classList.add('active');//点谁的加上谁
+                box2s[index].style.display='none';
+                box2s[i].style.display='block';
+                index=i
+            }
+        });
+        userd.onblur= async function(){
+            console.log(111)
+            let v=this.value.trim()
+            console.log(v)
+            let d=await axios.post('/getname',{
+                userd:v
+            }).then(({data:d})=>{
+                console.log(d)
+                 
+            })
+        }
+    </script>
+</body>
+</html>

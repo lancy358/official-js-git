@@ -23,12 +23,36 @@
      <script>
          btn.onclick=async function(){
              adddir.style.display='block';
-
-             let data=  await fetch('/add?hh').then(d=>d.json());
-             if(data.code===0){
-                 alert('文件夹创建成功')
-             }
+             adddir.onblur= async function(){
+                 console.log(111)
+                let v1=adddir.value
+                let data=  await fetch('/add?mkdirname='+v1).then(d=>d.json());
+                if(data.code===1){
+                    alert('文件夹创建成功')
+                    adddir.style.display='none';
+                    adddir.value=''
+                }
+            }
          }
+         rebtn.onclick=function(){
+            rename_box.style.display='block';
+            
+            rename.onclick=async function(){
+                let v1=oldname.value;
+                 let v2=newname.value;
+                 console.log(v1,v2)
+                 let data= await fetch('/rename',{
+                     method:'post',
+                     body:`oldname=${v1}&newname=${v2}`,
+                     headers:{'content-type':'application/x-www-form-urlencoded'}
+                 }).then(d=>d.json());
+                 if(data.code===1){
+                     alert('修改成功');
+                     rename_box.style.display='none';
+                 }
+            }
+
+        }
      </script>
 </body>
 </html>

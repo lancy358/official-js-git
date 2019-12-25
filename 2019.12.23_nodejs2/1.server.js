@@ -1,8 +1,8 @@
 const http=require('http'),//引入http模块
 jquery=require('jquery'),//引入jquery
 fs=require('fs'),//引入文件模块
-urlModel=require('url'),//引入url模块 能够把url分割成路劲 查询信息 hash
-qs=require('querystring');//引入querystring方法 能够将url序列化操作，转成对象
+urlModel=require('url'),//引入url模块 能够把url分割成路劲(pathname) 查询信息(query) hash
+qs=require('querystring');//引入querystring方法 qs.parse(query)能够将url序列化操作，转成对象
 // fs.mkdir('www',function(err){
 //     if(err){
 //         console.error(err)
@@ -55,17 +55,21 @@ const app=http.createServer((req,res)=>{
                 if(err){
                     if(err.code==='EEXIST'){ //如果有重名的
                         fs.readdir('www/',(error,filesAry)=>{
-                            console.log(filesAry
-                                );//找出www下的所有文件夹
+                            // console.log(filesAry
+                                // );//找出www下的所有文件夹
                             let num=0;
-                            let b=filesAry.includes(madirname);
+                            let b=filesAry.includes(mkdirname);
+                            // console.log(b)
                             let name='';
                             while(b){
-                                name=madirname.replace(/\(\d+\)/,''); //把带括号的去掉
+                                name=mkdirname.replace(/\(\d+\)/,''); //把带括号的去掉
                                 b=filesAry.includes(name+'('+(++num)+')');//重名的话后面加上（数字）
+                                // console.log(b)
                                 name=name+'('+(num)+')'
+                                console.log(name)
                             }
-                            fs.mkdir('www'+name+'/',(err)=>{
+                            fs.mkdir('www/'+name+'/',(err)=>{
+
                                 console.log('第二次创建成功')
                                 res.end(JSON.stringify({
                                     code:0,
@@ -83,7 +87,45 @@ const app=http.createServer((req,res)=>{
                     code:1,
                     msg:'创建文件夹成功'
                 }))
-            })
+            });
+            break;
+        case '/rename':
+            if(/^post$/i.test(req.method)){
+                let temp='';
+                req.on('data',(d)=>{
+                    temp+=d;//post请求是一段一段的传
+                });
+                console.log(temp)
+                req.on('end',()=>{
+                    let o=qs.parse(temp.toString());
+                    fs.rename('www/'+o.oldname,'www/'+o.newname,()=>{
+                        res.end(JSON.stringify({
+                            code:1,
+                            msg:'rename success!'
+                        }))
+                    })
+
+                })
+
+            }
+            break;
+        case '/jsonp':
+            let o=qs.parse(query.toString());
+            if(o.wd==1){
+                let json=JSON.stringify({
+                    code:1,
+                    ary:[1,2,3,4,5]
+                });
+                res.end(o.callback+'('+json+')')//返回jsonp格式的数据给前端用
+            }else{
+                let json2=JSON.stringify({
+                    code:1,
+                    ary:[5,4,3,2,1]
+                });
+                res.end(o.callback+'('+json2+')')
+            }
+            break
+
         }
     }
 });
@@ -95,6 +137,7 @@ app.on('error',(e)=>{
     console.log(e);
     if(e.code==='EADDRINUSE'){
         port++;
+        console.log(port);
         app.listen(port)
     }
 })
