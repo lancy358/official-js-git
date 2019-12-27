@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    用户名：<input type="text" name="" id="us">
+    密码：<input type="password" name="" id="pw">
+   <button id="btn">按钮</button>
+   <script>
+      
+       us.onblur=async function(){
+            let data=await fetch('/post',{
+                body:'user='+this.value,
+                headers:{
+                    'content-type':'application/x-www-form-urlencoded',
+                },
+                method:'post'
+            }).then(d=>d.json());
+            console.log(data)
+            if(data.code===1){
+                this.style.border='1px solid red'
+            }else if(data.code===0){
+                this.style.border='1px solid green'
+            }
+        }
+        btn.onclick= async function(){
+            let v1=us.value;
+            let v2=pw.value;
+            console.log(111)
+            let data=await fetch('/post',{
+                method:'post',
+                body:'user='+v1+'&password='+v2,
+                headers:{'content-type':'application/x-www-form-urlencoded'}
+            }).then(d=>d.json());
+            if(data.code==2){
+                alert(data.msg)
+            }else if(data.code===0){
+                alert('注册成功')
+            }else if(data.code===1){
+                alert('注册失败')
+            }
+        }
+   </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./axios.js"></script>
+    <script>
+        const instance=axios.create();
+        let mm =instance.interceptors.request.use(config =>{
+            console.log('被拦截')
+            return config;
+        })
+        document.onclick = function () {
+            axios.get('/a').then(({ user }) => {
+                console.log(user);
+            });
+            instance.get('/b').then((d) => {
+                console.log(d);
+                //当b数据回来的时候，取消局部拦截
+                instance.interceptors.request.eject(mm);
+            });
+
+        }
+        // let timer = null, num = 0;
+        axios.interceptors.request.use(async function (config) {
+            console.log(config, 111)
+            let u = localStorage.getItem('session_id');//获取在前端种下的session_id
+            console.log(u)
+            
+            if (u) {
+                let d = await fetch('/islogin').then(d=>d.json())
+                    console.log(d)
+                    
+                    if (d.code === 0) {
+                        return config
+                    } else {
+                        // window.location.href = '/'
+                    }
+              
+            } else {
+                window.location.href = '/'
+            }
+        }, error => {
+
+            return Promise.reject(error);
+        });
+        axios.interceptors.response.use(function (config) {
+            console.log(config)
+            config.user = config.data.user
+            return config;
+
+        }, error => {
+
+            return Promise.reject(error);
+        });
+
+    </script>
+</body>
+
+</html>

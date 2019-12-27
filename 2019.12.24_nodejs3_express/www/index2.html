@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>同学，你好！</h1>
+    <p id="p">欢迎回来</p>
+    <button id="btn">退出登录</button>
+    <script src="./axios.js"></script>
+    <script>
+        btn.onclick=function(){
+            axios.get('/loginout').then(({data:d})=>{
+                if(d.code===0){
+                    window.location.href='/'
+                }
+                
+            })
+        }
+        document.onclick=function(){
+            axios.get('/islogin').then(({data:d})=>{
+                console.log(d.data)
+                if(d.code===0){
+                    p.innerText='欢迎'+d.userd+'回来'
+                    localStorage.setItem('session_id',d.userd)
+                }else{
+                    window.location.href='/'
+                }
+            })
+        }
+        // document.onclick=function(){
+            // let timer=null,num=0;
+            axios.interceptors.request.use(async function (config) {
+            console.log(config, 111)
+            let u = localStorage.getItem('session_id');//获取在前端种下的session_id
+            console.log(u)
+            if (u) {
+                let d = await fetch('/islogin').then(d=>d.json())
+                    console.log(d)
+                    if (d.code === 0) {
+                        console.log(config)
+                        return config
+                    } else {
+                        window.location.href = '/'
+                    }
+            } else {
+                window.location.href = '/'
+            }
+        }, error => {
+            return Promise.reject(error);
+        });
+        axios.interceptors.response.use(function (config) {
+            console.log(config)
+            config.userd = config.data.userd    
+            console.log(config)
+            return config;
+        }, error => {
+            return Promise.reject(error);
+        });
+        // }
+    </script>
+</body>
+</html>

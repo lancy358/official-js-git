@@ -23,10 +23,9 @@
         }
         .box2{
             height: 150px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-evenly;
+        }
+        .box2 div{
+            margin-top: 30px;
         }
         #box_register{
             display: none;
@@ -38,7 +37,7 @@
              
         }
         #diag{
-            width: 100px;
+            /* width: 100px; */
             height: 30px;
             background-color: gray;
             color: black;
@@ -62,11 +61,11 @@
     <p id="p"></p>
     <div id="diag"></div>
     <div id="change">
-    <button id="b1" class=" bb">登录</button>
+    <button id="b1" class=" bb  active">登录</button>
     <button id="b2" class="bb">注册</button>
     </div>
     <div id="box">
-        <div id="box_login" class="box2 ">
+        <div id="box_login" class="box2">
             <div class="box1"><span>登录用户名：</span><input type="text" autocomplete="off"  placeholder="请输入用户名"  id="userd"></div>
             <div class="box1"><span>登录密&&码：</span><input type="password"   id="pwd"></div>
         </div>
@@ -77,15 +76,15 @@
         
     
         <div id="btn_box">
-            <button id="register">注册</button>
             <button id="login">登录</button>
+            <button id="register">注册</button>
         </div>
     </div>
     <script src="axios.js"></script>
     <script>
-        function diag(val){
+        function Diag(val){
             diag.innerText=val;
-            diag.style,top=0;
+            diag.style.top = '1px';
             setTimeout(()=>{
                 diag.style.top='-30px'
             },1000)
@@ -102,16 +101,70 @@
                 index=i
             }
         });
-        userd.onblur= async function(){
-            console.log(111)
-            let v=this.value.trim()
-            console.log(v)
-            let d=await axios.post('/getname',{
-                userd:v
+        // userd.onblur= async function(){
+        //     // console.log(111)
+        //     let v=this.value.trim()
+        //     if(v){
+        //         // console.log(v)
+        //         let d=await axios.post('/getname',{
+        //             userd:v
+        //         })
+        //         console.log(d);
+                
+            //     .then(({data:d})=>{
+            //         // console.log(d)//对象
+            //         if(d.code===0){
+            //             userd.style.border='1px solid green'
+            //         }else if(d.code===1){
+            //             userd.style.border='1px solid red';
+            //             Diag('用户已存在')
+            //         }
+            //     })
+            // }else{
+            //     Diag('请输入内容')
+            // }
+        // }
+        login.onclick= function(){
+            let v1=userd.value.trim();
+            let v2=pwd.value.trim();
+            let d= axios.post('/login',{
+                userd:v1,
+                pwd:v2
             }).then(({data:d})=>{
-                console.log(d)
-                 
+                if(d.code===0){
+                    Diag('登录成功');
+                    userd.style.border='1px solid green'
+                    window.location.href='/index2.html'
+                }else if(d.code===1){
+                    Diag('用户未注册');
+                    userd.style.border='1px solid red'
+                }else if(d.code===2){
+                    userd.style.border='1px solid red'
+                    Diag('用户名或者密码错误')
+                }else if(d.code===4){
+                    userd.style.border='1px solid red'
+                    Diag('参数错误')
+                }
+            });
+           
+        }
+        register.onclick=async function(){
+            let v1=user.value;
+            let v2=pw.value
+            let d= await axios.post('register',{
+                user:v1,
+                pw:v2
             })
+            d=d.data;
+            if(d.code===1){
+                userd.style.border='1px solid red'
+                Diag('用户已存在')
+            }else if(d.code===0){
+                userd.style.border='1px solid green'
+                Diag('注册成功')
+            }else if(d.code===2){
+                Diag(d.msg)
+            }
         }
     </script>
 </body>
