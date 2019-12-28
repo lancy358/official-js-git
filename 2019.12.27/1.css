@@ -1,0 +1,9 @@
+body{
+    background:red
+}
+#box{
+    width: 100px;
+    height: 100px;
+    background: skyblue;
+    border:2px solid yellow
+}
