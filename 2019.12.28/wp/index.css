@@ -1,0 +1,11 @@
+body{
+    background:red
+}
+#box{
+    width: 200px;
+    height: 100px;
+    background-color: yellow;
+}
+img{
+    width: 300px;
+}
