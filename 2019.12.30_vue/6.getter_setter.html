@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Object.defineProperty(obj,prop,desc) //prop 属性 desc属性的描述
+        let obj={name:'hh'};
+        // obj.age=2;
+        // let num=2;
+        // Object.defineProperty(obj,'age',{
+            // value:2,
+            // writable:false,//属性不可被修改
+            // enumerable:false,//属性不可以被枚举
+            // configurable:false,//属性不可以被删除
+            // get(){//读属性  读取这个属性的时候触发
+            //     console.log(111)
+            //     return num //return后的数据就是读取的结果且必须写return
+        //     },
+        //     set(val){//当设置属性的时候触发 可以没有return
+        //     console.log(222);
+        //     console.log(val)
+        //     num=val
+        //     }
+        // })
+        // console.log(obj.age)
+        // obj.age=3
+        // console.log(obj.age)
+        // for (let attr in obj){
+        //     console.log(attr)//name
+        // }
+        // // console.log(delete obj.name);
+        // console.log(delete obj.age)
+        // console.log(obj)
+        let num=0;
+        Object.defineProperty(obj,'age',{
+            get(){
+                return num+=2.7
+            }
+        })
+        console.log(obj.age<3&&obj.age>5)//true
+    </script>
+</body>
+</html>

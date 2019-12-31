@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model="val"> -->
+        <!-- <p>{{revers}}</p> -->
+        <!-- <p>{{fn()}}</p> -->
+        <!-- <input v-model.lazy="fullname">
+        <p>{{fullname}}</p>
+        <p>{{fName}}</p>
+        <p>{{lName}}</p> -->
+        全选中:<input type="radio" value="全选中" v-model="val"/>
+        已选中:<input type="radio" value="已选中" v-model="val"/>
+        未选中：<input type="radio" value="未选中" v-model="val"/>
+        <hr />
+        <h3>当前你选择的是 {{val}}</h3>
+        <ul>
+            <li v-for="(val,key) in setAry"><span>{{val.title}}:{{val.checked}}</span>
+            </li>
+        </ul>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:"#app",
+        data:{
+            // val:'珠峰培训',
+            fName:'哈哈',
+            lName:'嘿嘿',
+            val:'全选中',
+            ary:[
+            {
+                    id:0,
+                    checked:true,
+                    title:'王东亮'
+                },
+                {
+                    id:1,
+                    checked:false,
+                    title:'李世杰'
+                },
+                {
+                    id:2,
+                    checked:false,
+                    title:'赵忠鹍'
+                }
+
+            ],
+            
+
+        },
+        computed:{
+                setAry(){
+                        const { val,ary }=this;
+                        return ary.filter(item=>{
+                            switch(val){
+                                case '全选中':
+                                return item;
+                                case '已选中':
+                                return item.checked===true;
+                                case '未选中':
+                                return item.checked===false;
+                                default:checked
+                                return item;
+
+                            }
+                        })
+
+                   
+                }
+            },
+
+        // computed:{
+        //     // revers(){
+        //     //     return this.val.split('').reverse().join('')
+        //     // }
+        //     fullname:{
+        //         get(){
+        //             return this.fName+' '+this.lName
+        //         },
+        //         set(val){
+        //             let ary =val.split(' ');
+        //             this.fName=ary[0];
+        //             this.lName=ary[ary.length-1]
+        //         }
+        //     }
+            
+        // },
+        methods:{
+            fn(){
+                return this.val.split('').reverse().join('')
+            }
+        }
+    })
+    </script>
+</body>
+</html>

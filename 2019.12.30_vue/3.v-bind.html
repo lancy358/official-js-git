@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .green{
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- <button @click="num=key" v-for="(val,key) in ary">{{val}}</button>
+        <img v-bind:src="imgs[num]" alt="">
+        <img :src="val" alt="" v-for="(val,key) in imgs"> -->
+        <p v-bind:style="{fontSize:size+'px'}">123</p>
+        <!-- <p :style="{fontSize:size+'px',color:'green'}">4567</p> -->
+        <!-- <p :class="color">566789</p> -->
+        <div v-bind="{data:1}"></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        let v=new Vue({
+            el:"#box",
+            data:{
+                ary:['第一张图片','第二张图片'],
+                imgs:['./1.png','./2.jpg'],
+                num:0,
+                size:50,
+                color:{
+                    green:true
+                }
+            }
+        })
+    </script>
+</body>
+</html>
