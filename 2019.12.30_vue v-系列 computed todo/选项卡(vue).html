@@ -12,6 +12,9 @@
         border:1px solid #ccc
 
     }
+    .active{
+        background-color: yellow;
+    }
     
     </style>
     
@@ -27,11 +30,12 @@
         <button 
         @click="fn(key)"
         v-for="(val,key) in btns"
+        :class="block===key?'active':''"
         >{{val}}</button>
         <div 
         v-show="block===key"
         v-for="(val,key) in content"
-        > {{key}}</div>
+        > {{val}}</div>
     </div>
     <script src="vue.js"></script>
     <script>
@@ -40,16 +44,13 @@
             data:{
                 btns:['按钮一','按钮二','按钮三'],
                 content:['111','222','333'],
-                num:0,
-                block:0,
+                block:0
             },
             methods:{
-                fn(num){
-                    this.block=num
+                fn(key){
+                    this.block=key
                 }
             }
-
-
         })
     </script>
 </body>

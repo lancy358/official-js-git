@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" 
+        v-model="txt"
+        @change.13="add"
+        />
+        <ul>
+            <li v-for="(val,key) in ary">
+                <input type="checkbox"
+                v-model="val.checked">
+                <span>{{val.val}}</span>
+            </li>
+        </ul>
+        <p>{{ary}}</p>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:'#box',
+        data:{
+            txt:'',
+            ary:getItm()
+        },
+        methods:{
+            add(){
+                console.log(222)
+                this.ary.unshift({
+                    id:Date.now(),
+                    val:this.txt,
+                    checked:false
+                });
+                this.txt=''
+            }
+        },
+        watch:{
+            ary(){
+                console.log(111)
+                localStorage.setItem('data',JSON.stringify(this.val))
+            }
+        }
+    });
+    function getItm(){
+        let v=localStorage.getItem('data');
+        return v && JSON.parse(v)||[
+            {
+            id:0,
+            val:'hh',
+            checked:true
+        },
+            {  
+            id:1,
+             val:'jj',
+             checked:false
+            }
+        ]
+    }
+    </script>
+</body>
+</html>

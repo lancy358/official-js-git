@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        <input type="text" v-model="val">
+        {{val}}
+        <p>{{fn()}}</p>
+        <h1>{{fn1}}</h1>
+        <h2>{{val|rever|clearNum}}</h2>
+        
+    </div>
+    <script src="vue.js"></script>
+    <script >
+        Vue.filter('clearNum',function(val){
+            return val.replace(/\d+/g,'')
+        })
+        new Vue({
+            el:'#app',
+            data:{
+                val:'hh',
+            },
+            methods:{
+                fn(val){
+                    return this.val.split('').reverse().join('')
+                }
+            },
+            computed:{
+                fn1(val){
+                    return this.val.split('').reverse().join('')
+                }
+            },
+            filters:{
+                rever(val){
+                    return val.split('').reverse().join('')
+                }
+
+            }
+        })
+    
+    </script>
+</body>
+</html>

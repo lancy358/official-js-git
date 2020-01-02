@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <app1></app1>
+        <app2></app2>
+        <rrt></rrt>
+        <hr>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        Vue.component('rrt',{//全局定义子组件
+            template:`
+            <div>{{str3}} <button @click="click1">按钮</button></div>
+           
+
+            `,
+            data(){
+                return {
+                    str3:'我是全局子组件'
+                }
+            },
+            methods:{
+                click1(){
+                    alert(1)
+                }
+            }
+        })
+        const qqw={
+            template:`<div>{{str2}}</div>`,
+            data(){
+                return {
+                    str2:'加油，泥鞥性'
+                }
+            }
+        }
+        const app1={
+            template:`<div><button @click="click">点击</button>{{str1}}<qqw></qqw></div>`,
+            data(){
+                return {
+                    str1:'vue太难了',
+                    b:0
+                }
+            },
+            methods:{
+               click(){
+                    this.b++
+                    console.log(this.b)
+               }
+            },
+            components:{
+                qqw
+            }
+
+        }
+        const app2={
+            template:`<input v-model="str">`,
+            data(){
+                return {
+                    str:'vue太简单了'
+                }
+            }
+        }
+    new Vue({
+        el:'#app',
+        data:{
+            msg:'hh'
+        },
+        methods:{
+
+        },
+        components:{
+
+            app1,app2//局部定义组件
+        }
+
+    })
+    </script>
+</body>
+</html>

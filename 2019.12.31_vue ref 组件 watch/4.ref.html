@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn">点击取值</button>
+        <div id="box" ref="box">12234</div>
+        <div  ref="box1"></div>
+        <input type="text" ref="ipt">
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:'#app',
+        data:{
+            val:'123456'
+        },
+        methods:{
+            fn(){
+                console.log(this.$refs.ipt)
+            }
+        }
+    })
+    </script>
+</body>
+</html>

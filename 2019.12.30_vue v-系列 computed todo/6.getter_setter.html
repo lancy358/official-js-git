@@ -37,12 +37,28 @@
         // console.log(delete obj.age)
         // console.log(obj)
         let num=0;
+        // Object.defineProperty(obj,'age',{  
+        //     get(){
+        //         return num+=2.7
+        //     },
+            
+
+        // })
+        // console.log(obj.age<3&&obj.age>5)//true?
         Object.defineProperty(obj,'age',{
             get(){
-                return num+=2.7
+                return num
+            },
+            set(val){
+                num=todo(val);
+
             }
-        })
-        console.log(obj.age<3&&obj.age>5)//true
+        });
+        obj.age=9
+        function todo(n){
+            return n<10?'0'+n:''+n
+        }
+        console.log(obj.age)
     </script>
 </body>
 </html>

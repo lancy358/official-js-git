@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">{{num}}
+        <app :pnum="num" :pary="ary"
+        ></app>
+        <ppa>
+        </ppa>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        const app={
+            template:`
+            <div>
+                <div>{{pnum}}</div>
+                <ul>
+                    <li v-for="(val,key) in pary">{{val}}</li>
+                </ul>
+            </div>
+            `,
+            props:['pnum','pary'
+            ],
+            data(){
+                return {
+                    a:1
+                }
+            }
+        }
+        const aab={
+            template:`<button @click="click">{{str1}}:{{b}}</button>`,
+            data(){
+                return {
+                    str1:'vue太难了',
+                    b:0
+                }
+            },
+            methods:{
+                click(){
+                    this.b++
+                }
+            },
+        }
+        const ppa={
+            template:
+                `<span>{{str}}
+                    <aab ></aab>
+                </span>`,
+            data(){
+                return {
+                    str:'vue真简单才怪',
+                }
+            },
+            components:{
+                aab
+            }
+        }
+      
+        new Vue({
+            el:"#box",
+            data:{
+                num:0,
+                ary:[23,2,4,6,6]
+            },
+            components:{
+                app,ppa
+            }
+        })
+    </script>
+</body>
+</html>
