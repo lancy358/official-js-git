@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子级拿到父级的数据给自己用</title>
+</head>
+<body>
+    <div id="app">
+        <h1>父元素</h1>
+        <button @click="changedata">父元素按钮{{num}}</button>
+        <hr>
+        <temp
+            :nn="num"
+            @childto="fromchild"
+        ></temp
+            >
+    </div>
+    <template id="temp">
+        <div>
+            <h2>我是子元素</h2>
+            <button @click="add">子按钮{{childnum}}</button>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        const temp={
+            template:'#temp',
+            props:['nn'],
+            data(){
+                return {
+                    childnum:this.nn//子级拿到父级的数据
+                }
+            },
+            methods: {
+                add(){
+                    this.childnum++;//子级的数据自己用
+                    this.$emit('childto',this.childnum)//this.childnum传参数给fromchild 从而影响父级
+                }
+            },
+        }
+        new Vue({
+            el:'#app',
+            data:{
+                num:0
+            },
+            methods: {
+                changedata(){
+                    this.num++
+                },
+                fromchild(val){//子级的数据关联父级的数据
+                    this.num=val//父级的数据会根据子级的数据来改变
+                }
+            },
+            components:{
+                temp
+            }
+        })
+    </script>
+</body>
+</html>

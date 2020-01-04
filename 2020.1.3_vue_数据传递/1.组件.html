@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <temp></temp>
+        <hr>
+        <ppa></ppa>
+        <paa></paa>
+    </div>
+    <template id="temp">
+        <div>我是模板{{num}}</div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        const temp={
+            template:'#temp',
+            data(){
+                return {
+                   num:0
+                }
+            }
+        }
+        const pap={
+            template:`<div>{{str2}}</div>`,
+            data(){
+                return {
+                    str2:'我是局部组件'
+                }
+            }
+        }
+        const ppa={
+            template:`
+            <div>
+                <div>{{str}}</div>
+                <pap></pap>
+            </div>
+            `,
+            data(){
+                return {
+                    str:'我是全局组件'
+                }
+            },
+            components:{
+                pap
+            }
+        }
+        const paa={
+            template:`
+                <button @click="num++">按钮{{num}}</button>
+            `,
+            data(){
+                return {
+                    num:0
+                }
+            }
+        }
+        Vue.component('temp',temp)
+        Vue.component('ppa',ppa)
+        new Vue({
+            el:'#app',
+            components:{
+                paa
+            }
+        })
+    </script>
+</body>
+</html>

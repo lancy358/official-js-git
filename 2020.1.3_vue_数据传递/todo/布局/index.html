@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" 
+                    placeholder="请输入内容" 
+                    v-model="val"
+                    @keyup.enter="add"
+                >
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox"
+                    
+                    @click="checkedall"
+                    :checked="allchecked"
+                >
+                <ul class="todo-list">
+                    <li  :class="{
+                        completed:val.checked,
+                        editing:val.onoff
+                    }"
+                        v-for="(val,key) in setAry"
+                        :key="val.id"
+                    >
+                        <div class="view">
+                            <input 
+                            class="toggle" type="checkbox"
+                            v-model="val.checked"
+                            >
+                            <label 
+                                @dblclick="dbl(val,key)"
+                            >{{val.txt}}</label>
+                            <button 
+                                class="destroy" 
+                                @click="del(key)"
+                            ></button>
+                        </div>
+                        <input 
+                            class="edit" 
+                            value="val.txt"
+                            v-model="txt2" 
+                            ref="input"
+                            @blur="blur(val)"
+                            @keyup.esc="esc(val)"
+                        />
+                    </li>
+                </ul>
+            </section>
+            {{ary}}
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{unchecked}}</strong>
+	            	<span>条未选中</span>
+                </span>
+                <ul 
+                    class="filters"
+                >
+                    <!-- <li>
+                        <a 
+                            href="#/all" 
+                            class="selected"
+                           
+                        >全部</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/unchecked" 
+                            
+                            class=""
+                        >未选中</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/checked"
+                            class=""
+                        >已选中</a>
+                    </li> -->
+                    <li 
+                     v-for="(val,key) in ary2"
+                     @click="changefn(key,val)"
+                    >
+                        <a 
+                            href="javascript:;" 
+                            :class="b===key?'selected':''"
+                           
+                        >{{val}}</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+    
+<script src="../../vue.js"></script>
+<script src="index.js"></script>
+<script>
+   
+ 
+    
+</script>
+</body>
+</html>
