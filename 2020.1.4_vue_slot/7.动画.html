@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+
+        .v-enter,.v-leave-to {
+            opacity: 0;
+            transform: translateX(300px);
+        }
+        .v-enter-active,.v-leave-active{
+            transition: 1s;
+        }
+        .v-enter-to,.v-leave{
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .n-enter,.n-leave-to {
+            opacity: 0;
+            transform: translateY(300px);
+        }
+        .n-enter-active,.n-leave-active{
+            transition: 1s;
+        }
+        .n-enter-to,.n-leave{
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button @click="onoff=!onoff">点击</button>
+        <transition>
+            <app v-show="onoff">
+            </app>
+        </transition >
+        <hr>
+        <button @click="b=!b">点击</button>
+        <transition name="n">
+            <div v-show="b"> 哈哈</div>
+        </transition>
+    </div>
+    <template id="app">
+        <div>
+            呵呵哒
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        const app={
+            template:'#app'
+        }
+        new Vue({
+            el:'#box',
+            data:{
+                onoff:false,
+                b:false
+            },
+            components:{
+                app
+            }
+        })
+    
+    </script>
+</body>
+</html>

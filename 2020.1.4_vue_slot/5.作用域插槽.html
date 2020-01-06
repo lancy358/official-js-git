@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <app :data="ary">
+            <template  #childrenData="cdata">
+                {{cdata}}
+                <h2>我的名字叫：{{cdata.nn}}</h2>
+                <p>我的年龄是：{{cdata.age}}</p>
+                <p>我的编号是：{{cdata.id}}</p>
+
+            </template>
+           
+        </app>
+        
+    </div>
+    <template id="app">
+        <div>
+            <ul>
+                <li v-for="(val,key) in data">
+                    <slot 
+                        name="childrenData"
+                        :nn="val.name"
+                        :age="val.age"
+                        :id="val.id"
+                    >
+                   
+                   {{val.name}}
+                    </slot>
+                   
+                   
+                </li>
+            </ul>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        const app={
+            template:'#app',
+            props:['data']
+        }
+        new Vue({
+            el:'#box',
+            
+            data:{
+                ary:[
+                    {
+                        id:0,
+                        name:'hh',
+                        age:12
+                    },
+                    {
+                        id:1,
+                        name:'jj',
+                        age:13
+                    },
+                    {
+                        id:2,
+                        name:'ww',
+                        age:14
+                    }
+
+                ]
+            },
+            components:{
+                app
+            }
+        })
+    </script>
+</body>
+</html>

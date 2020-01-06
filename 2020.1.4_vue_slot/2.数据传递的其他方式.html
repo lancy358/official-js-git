@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       
+        <ppa></ppa>
+    </div>
+    <template id="ppa">
+        <div>
+            {{ary}}
+            <button @click="fn">按钮</button>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        const ppa={
+            template:'#ppa',
+            created() {
+                console.log(this.$parent.num) 
+            },
+            methods: {
+                fn(){
+                    this.num++
+                }
+            },
+            inject:['ary','num']
+        }
+        new Vue({
+            el:'#app',
+            components:{
+                ppa
+            },
+            data:{
+                num:0
+            },
+            provide:{
+                ary:[1,2,3],
+                num:0
+
+            }
+        })
+    </script>
+</body>
+</html>

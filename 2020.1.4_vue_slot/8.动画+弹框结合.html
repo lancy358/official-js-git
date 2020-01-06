@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .shadow{
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .dialog{
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            left: 0;
+            right:  0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background: white;
+            box-shadow: rgba(0, 0, 0, .5);
+        }
+        .v-enter,.v-leave-to{
+            opacity: 0;
+            transform: translateY(-300px);
+        }
+        .v-enter-active,.v-leave-active{
+            transition: 1s;
+
+        }
+        .n-enter{
+            opacity: 0;
+        }
+        .n-enter-active{
+            transition: 1s;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button @click="changeOnoff">点击</button>
+        <transition name="n">
+            <div class="shadow"  v-show="onoff"></div>
+        </transition>
+        <transition>
+            
+            <app 
+                v-show="onoff"
+                :of="onoff"
+                @coff="changeOnoff"
+            >
+                <template slot="content">
+                    <p>好啊好啊</p>
+                    <p>眼瞎</p>
+                </template>
+            </app>
+        </transition>
+    </div>
+    <template id="app">
+        <div class="dialog">
+            <div class="txt">
+                <slot name="content">
+                </slot>
+            </div>
+            <div class="btns">
+                <button @click="off">确定</button>
+                <button @click="off">取消</button>
+            </div>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+        const app={
+            template:'#app',
+            props:['of'],
+            methods:{
+                off(){
+                    this.$emit('coff')
+                }
+            }
+        }
+    new Vue({
+        el:'#box',
+        data:{
+            onoff:false
+        },
+        methods: {
+            changeOnoff(){
+                this.onoff=!this.onoff
+            }
+        },
+        components:{
+            app
+        }
+    })
+    </script>
+
+</body>
+</html>
