@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // let a = 'name';
+    // let person = 'erYa'
+    // let obj = {
+    //     name: 1? 'badMonkey' : 'sunWuKong',
+    //     age: null && 0,
+    //     12: a,
+    //     person
+    // }
+    // console.log(obj[a])//badmonkey
+    // console.log(obj['name'])//badMonkey
+    // console.log(obj.name)//badMonkey
+    // console.log(obj[name])//undefined
+    // // console.log(obj.12)
+    // console.log(obj[12])//name
+    // console.log(person)//erya
+// function fn(m){
+//     return m
+// }
+
+// let x = fn(function(){
+//     console.log('孙悟空')
+//     return '';
+//     console.log(3.1415926 + 4.31568)
+// })
+// function fn(m){
+//     return m
+// }
+
+// let x = fn(function(r){
+//     console.log('孙悟空')
+//     return r;
+//     console.log(3.1415926 + 4.31568)
+// })
+
+// console.log(x(3))
+// let x = function(s){
+//     return s
+// }
+
+// function fn(m){
+//     return m(2)
+// }
+
+// let num = fn(x)
+// console.log(num)
+// let fn = (...n)=>{
+//     console.log(n)
+//     console.log(...n)
+//     console.log([...n])
+//     let m = [...n];
+//     console.log(m)
+//     console.log(m == n)
+// }
+// fn(1,2,3,4,5)
+// var a=4;
+// function fn(){
+// alert(a); //undefined
+// var a=10;
+// alert(a)//
+// }
+// fn()
+// +function(){
+// console.log(a);//function a(){}
+// var a=5;
+// function a(){};
+// console.log(a);//5
+// function b(){};
+// b=6;
+// console.log(b);//6
+// var c=d=b;
+// }();
+// console.log(d);//6
+// console.log(c);//报错
+// var obj ={
+// val:2,
+// dbl:function(){
+// var val=45;
+// console.log(this);//obj
+// this.val*=2;
+// console.log(val);//45
+// console.log(this.val);//4
+// }
+// }
+// var ff=obj.dbl();
+// // 1 var fn=obj.dbl;
+// // 2 fn()
+// // 1+2两步相当于
+// fn=function(){ 
+//             var val = 45;
+//             console.log(this); //window
+//             this.val *= 2;
+//             console.log(val); //45
+//             console.log(this.val);//NaN
+//         }
+//         fn()
+// function Fn(){
+//         this.a='hh'
+//         console.log(this)
+//     }
+//     Fn.prototype.a=function(){console.log(1);};
+//     // Fn.a=function(){console.log(3);};
+//     // Function.a=function(){console.log(4)};
+//     // Function.prototype.a=function(){console.log(5)};
+//     // Object.a=function(){console.log(6)};
+//     Object.prototype.a=function(){console.log(7)};
+//     Fn.prototype.a=function(){console.log(2)};
+//     let f=new Fn()
+//     Fn.prototype.a();//=f.a();2
+//     // f.a();//报错
+//     Fn.a();//5 Function.prototype.a
+//     Function.a();//=Function.prototype.a()
+//     Object.a()//终端
+//     // Fn.a();
+//     console.log(f.a)
+// function Parent() {
+//             this.a = 1;
+//             this.b = [1, 2, this.a];
+//             this.c = { demo: 5 };
+//             this.show = function () {
+//                 console.log(this.a, this.b, this.c.demo);
+//             }
+//         }
+//         function Child() {
+//             this.a = 2;
+//             this.change = function () {
+//                 this.b.push(this.a);
+//                 this.a = this.b.length;
+//                 this.c.demo = this.a++;
+//                 console.log(this.a,this.b,this.c.demo);
+//             }
+//         }
+//         Child.prototype = new Parent(); //原型继承
+//         var parent = new Parent();
+//         var child1 = new Child();
+//         var child2 = new Child();
+//         child1.a = 11;
+//         child2.a = 12;
+//         parent.show(); //1,[1,2,1],5
+//         child1.show();//11,[1, 2, 1],5
+//         child2.show();//12,[1, 2, 1],5
+//         child1.change();//5,[1,2,1,11],4
+//         child2.change();//[1,2,1,11,12],6,5
+//         parent.show();//1,[1,2,1],5
+//         child1.show();//5,[1,2,1,11,12],5
+//         child2.show();  6,[1,2,1,11,12],5
+// var obj = {
+//         a:5
+//     }
+//     var obj = { 
+//         a:1,
+//         fn:(function(val){
+//             console.log(obj.a)//5
+//         })(obj.a)
+//     };
+
+    
+//     // obj.fn();
+//     let obj2 = obj;
+//     // obj2.fn();
+
+//     console.log(obj.fn)
+    // 31 //第二题
+     async function async1() {
+    
+    console. log("async1 start");
+    
+    await async2();
+    
+    console.log("async1 end");
+     }
+    
+     async function async2() {
+    
+    console.log( ' async2');
+     }
+     console.log("script start");
+     setTimeout(function () {
+    
+    console. log("settimeout");
+     });
+    async1()
+   new Promise(function (resolve) {
+   
+    console. log("promise1");
+    
+    resolve();
+     }). then(function () {
+    
+    console. log("promise2");
+     })
+
+    // set Immediate(()=>{
+    // console.log("set Immediate")
+    //  })
+    // process . nextTick(()=>{
+  
+    // console. log("process")
+    // })
+     console.log('script end');
+    'script start'
+    "async1 start "
+    
+    
+    ' async2'
+    "promise1"
+    'script end'
+    "async1 end"
+    "promise2"
+    "settimeout"
+    </script>
+    
+    
+</body>
+</html>

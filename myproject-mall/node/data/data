@@ -1,0 +1,43 @@
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `imgPath` varchar(2000) DEFAULT '',
+  `name` varchar(255) DEFAULT '',
+  `brand` varchar(255) DEFAULT '',
+  `price` varchar(255) DEFAULT '',
+  `artnum` varchar(255) DEFAULT '',
+  `switch1` int(11) DEFAULT 0,
+  `switch2` int(11) DEFAULT 0,
+  `switch3` int(11) DEFAULT 0,
+  `sort` varchar(255) DEFAULT '',
+  `sales` varchar(255) DEFAULT '',
+  `unaudit` varchar(255) DEFAULT '',
+  `audit` varchar(255) DEFAULT '',
+  `first` varchar(255) DEFAULT '',
+  `second` varchar(255) DEFAULT '',
+  `subhead` varchar(255) DEFAULT '',
+  `marketprice` varchar(255) DEFAULT '',
+  `inventory` varchar(255) DEFAULT '',
+  `unit` varchar(255) DEFAULT '',
+  `Weight` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+insert  into product (imgPath,name,brand,price,artnum,switch1,switch2,switch3,sort,sales,unaudit,audit) VALUES('http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/images/20180615/5b235bb9Nf606460b.jpg','耐克NIKE 男子 休闲鞋 ROSHE RUN 运动鞋 511881-010黑色41码','NIKE','369','6799342',1,0,0,'0','0','未审核','审核详情');
+
+alter table product add Weight varchar(255) DEFAULT '';
+
+            first,
+            second,
+            subhead,
+            marketprice,
+            inventory,
+            unit,
+            Weight,
+CREATE TABLE `classForm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT '',
+  `pid` int(11) NOT NULL ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+insert  into classForm (name,pid,unit) VALUES ('汽车装饰',5,'件');
+alter table classForm add sort varchar(255) DEFAULT '';         
